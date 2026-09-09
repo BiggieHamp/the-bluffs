@@ -1,0 +1,503 @@
+---
+const pathname = Astro.url.pathname;
+
+const aboutPaths = ['/our-vision', '/amenities', '/area-activities', '/nearby-towns', '/testimonials', '/our-building-team'];
+const isAbout = aboutPaths.some(p => pathname === p);
+const isGallery = pathname === '/gallery' || pathname.startsWith('/gallery/');
+
+function active(path: string) {
+  return pathname === path ? 'active' : '';
+}
+---
+
+<header class="site-header">
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="The Bluffs — Home">
+      <img
+        src="/assets/images/logo.jpg"
+        alt="The Bluffs — Overlooking Weiss Lake"
+        width="160"
+        height="48"
+      />
+    </a>
+
+    <button
+      class="nav-toggle"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-menu" role="list">
+      <li>
+        <a href="/" class:list={['nav-link', active('/')]}>Home</a>
+      </li>
+
+      <!-- About dropdown -->
+      <li class="has-dropdown">
+        <button
+          class:list={['nav-link', 'dropdown-toggle', { active: isAbout }]}
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          About <span class="dropdown-arrow" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu" role="list">
+          <li><a href="/our-vision"       class:list={[active('/our-vision')]}>Our Vision</a></li>
+          <li><a href="/amenities"        class:list={[active('/amenities')]}>Alabama Mountain Property</a></li>
+          <li><a href="/area-activities"  class:list={[active('/area-activities')]}>Area Activities</a></li>
+          <li><a href="/nearby-towns"     class:list={[active('/nearby-towns')]}>Nearby Towns &amp; Cities</a></li>
+          <li><a href="/testimonials"     class:list={[active('/testimonials')]}>Testimonials</a></li>
+          <li><a href="/our-building-team" class:list={[active('/our-building-team')]}>Our Building Team</a></li>
+        </ul>
+      </li>
+
+      <!-- Gallery dropdown -->
+      <li class="has-dropdown">
+        <button
+          class:list={['nav-link', 'dropdown-toggle', { active: isGallery }]}
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          Gallery <span class="dropdown-arrow" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu" role="list">
+          <li><a href="/gallery"          class:list={[active('/gallery')]}>Gallery</a></li>
+          <li><a href="/gallery/lots-5-6" class:list={[active('/gallery/lots-5-6')]}>Lots 5 &amp; 6</a></li>
+        </ul>
+      </li>
+
+      <li><a href="/visit"     class:list={['nav-link', active('/visit')]}>Visit</a></li>
+      <li><a href="/contact"   class:list={['nav-link', active('/contact')]}>Contact</a></li>
+      <li><a href="/homesites" class:list={['nav-link', 'nav-link-homesites', active('/homesites')]}>Available Homes &amp; Homesites</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a
+        href="https://www.instagram.com"
+        aria-label="Follow The Bluffs on Instagram"
+        class="nav-social"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+      <a
+        href="https://www.facebook.com"
+        aria-label="Follow The Bluffs on Facebook"
+        class="nav-social"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </a>
+      <a href="/contact" class="btn-contact-nav">Contact Us</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-cream);
+    border-bottom: 1px solid rgba(140, 137, 100, 0.2);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    height: var(--nav-height);
+  }
+
+  /* Logo */
+  .nav-logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    margin-right: var(--space-4);
+  }
+
+  .nav-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  /* Link list */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-charcoal);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: var(--space-3);
+    right: var(--space-3);
+    height: 1px;
+    background: var(--color-olive);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-olive);
+  }
+
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Dropdown */
+  .has-dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .dropdown-arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    transition: transform var(--transition);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: var(--color-cream);
+    border: 1px solid rgba(140, 137, 100, 0.22);
+    box-shadow: var(--shadow-md);
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    min-width: 230px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+    pointer-events: none;
+  }
+
+  .has-dropdown:hover .dropdown-menu,
+  .has-dropdown:focus-within .dropdown-menu,
+  .has-dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: var(--space-2) var(--space-5);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    text-decoration: none;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .dropdown-menu li a:hover,
+  .dropdown-menu li a.active {
+    background: var(--color-olive-light);
+    color: var(--color-olive-dark);
+  }
+
+  /* Nav actions (right side) */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-social {
+    color: var(--color-charcoal-mid);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .nav-social:hover {
+    color: var(--color-olive);
+  }
+
+  .btn-contact-nav {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    background: var(--color-olive);
+    padding: var(--space-2) var(--space-5);
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: background var(--transition);
+    white-space: nowrap;
+  }
+
+  .btn-contact-nav:hover {
+    background: var(--color-olive-dark);
+  }
+
+  /* Mobile hamburger */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-charcoal);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ================================================
+     RESPONSIVE — mobile nav
+     ================================================ */
+  @media (max-width: 1050px) {
+    .nav-link-homesites {
+      display: none; /* too long for mid-width; still in mobile menu */
+    }
+  }
+
+  @media (max-width: 860px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-actions {
+      display: none;
+    }
+
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-cream);
+      flex-direction: column;
+      align-items: stretch;
+      padding: var(--space-4) var(--space-6) var(--space-8);
+      overflow-y: auto;
+      gap: 0;
+      z-index: 99;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-links > li {
+      border-bottom: 1px solid rgba(140, 137, 100, 0.15);
+    }
+
+    .nav-link {
+      padding: var(--space-4) 0;
+      font-size: var(--text-md);
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .nav-link::after {
+      display: none;
+    }
+
+    .nav-link-homesites {
+      display: flex;
+    }
+
+    /* Mobile dropdowns: inline, not overlapping */
+    .has-dropdown {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .dropdown-menu {
+      position: static;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      padding: 0 0 var(--space-2) var(--space-4);
+      display: none;
+      pointer-events: auto;
+    }
+
+    .has-dropdown.open .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li a {
+      padding: var(--space-3) 0;
+      font-size: var(--text-base);
+      border-bottom: 1px solid rgba(140, 137, 100, 0.08);
+    }
+
+    .dropdown-menu li a:hover,
+    .dropdown-menu li a.active {
+      background: transparent;
+      color: var(--color-olive);
+    }
+
+    /* Mobile social + CTA below the nav links */
+    .nav-links::after {
+      content: '';
+      flex: 1;
+    }
+  }
+</style>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const navLinks = document.querySelector<HTMLElement>('.nav-links');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    navLinks?.classList.toggle('open', !expanded);
+    document.body.style.overflow = !expanded ? 'hidden' : '';
+  });
+
+  // Close mobile menu on link click
+  navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      navLinks.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Dropdown toggles (click-based for keyboard + mobile)
+  document.querySelectorAll<HTMLButtonElement>('.dropdown-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const parent = btn.closest<HTMLElement>('.has-dropdown');
+      const isOpen = parent?.classList.contains('open');
+
+      // Close all other open dropdowns
+      document.querySelectorAll('.has-dropdown.open').forEach(el => {
+        if (el !== parent) {
+          el.classList.remove('open');
+          el.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      parent?.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!(e.target as Element).closest('.has-dropdown')) {
+      document.querySelectorAll('.has-dropdown.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Close dropdowns on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.has-dropdown.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+      });
+      toggle?.setAttribute('aria-expanded', 'false');
+      navLinks?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+</script>

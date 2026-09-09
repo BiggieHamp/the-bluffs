@@ -1,0 +1,21 @@
+# Build output
+dist/
+.output/
+
+# Dependencies
+node_modules/
+
+# Astro cache
+.astro/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large video files (host separately — exceeds GitHub 100MB limit)
+public/assets/video/

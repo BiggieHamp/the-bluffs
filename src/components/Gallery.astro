@@ -1,0 +1,315 @@
+---
+interface Image {
+  filename: string;
+  alt: string;
+}
+
+interface Props {
+  images: Image[];
+  folder: string;
+}
+
+const { images, folder } = Astro.props;
+---
+
+<!-- Masonry grid -->
+<div class="gallery-grid" role="list">
+  {images.map((img, i) => (
+    <div class="gallery-cell" role="listitem">
+      <button
+        class="gallery-trigger"
+        data-index={i}
+        aria-label={`View fullsize: ${img.alt}`}
+        type="button"
+      >
+        <img
+          src={`${folder}${img.filename}`}
+          alt={img.alt}
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="gallery-hover-label" aria-hidden="true">View fullsize</span>
+      </button>
+    </div>
+  ))}
+</div>
+
+<!-- Lightbox dialog -->
+<dialog class="lightbox" aria-label="Image viewer" aria-modal="true">
+  <button class="lightbox-close" aria-label="Close image viewer" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <button class="lightbox-prev" aria-label="Previous image" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" src="" alt="" />
+    <figcaption class="lightbox-caption"></figcaption>
+  </figure>
+
+  <button class="lightbox-next" aria-label="Next image" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="lightbox-counter" aria-live="polite" aria-atomic="true"></div>
+</dialog>
+
+<style>
+  /* ── Gallery Grid (CSS columns masonry) ── */
+  .gallery-grid {
+    columns: 3;
+    column-gap: var(--space-3);
+  }
+
+  .gallery-cell {
+    break-inside: avoid;
+    margin-bottom: var(--space-3);
+  }
+
+  .gallery-trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .gallery-trigger img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 350ms ease;
+  }
+
+  .gallery-hover-label {
+    position: absolute;
+    inset: 0;
+    background: rgba(28, 28, 26, 0.42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .gallery-trigger:hover img,
+  .gallery-trigger:focus-visible img {
+    transform: scale(1.04);
+  }
+
+  .gallery-trigger:hover .gallery-hover-label,
+  .gallery-trigger:focus-visible .gallery-hover-label {
+    opacity: 1;
+  }
+
+  .gallery-trigger:focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 2px;
+  }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    max-width: min(1100px, 95vw);
+    max-height: 95vh;
+    width: fit-content;
+    height: fit-content;
+    background: rgba(20, 20, 18, 0.97);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.88);
+  }
+
+  /* Prevent default [open] display:block from overriding flex */
+  .lightbox[open] {
+    display: flex;
+  }
+
+  .lightbox-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: var(--space-4) var(--space-8);
+    max-height: 90vh;
+  }
+
+  .lightbox-img {
+    display: block;
+    max-width: min(1000px, 90vw);
+    max-height: calc(90vh - 80px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius);
+  }
+
+  .lightbox-caption {
+    color: rgba(240, 238, 225, 0.55);
+    font-size: var(--text-xs);
+    margin-top: var(--space-3);
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  /* Navigation buttons */
+  .lightbox-close,
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    background: rgba(240, 238, 225, 0.1);
+    border: none;
+    color: var(--color-cream);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background var(--transition);
+    flex-shrink: 0;
+  }
+
+  .lightbox-close {
+    top: calc(-1 * var(--space-6));
+    right: calc(-1 * var(--space-6));
+    width: 44px;
+    height: 44px;
+    background: rgba(240, 238, 225, 0.15);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+  }
+
+  .lightbox-prev { left: calc(-1 * var(--space-14, 3.5rem)); }
+  .lightbox-next { right: calc(-1 * var(--space-14, 3.5rem)); }
+
+  .lightbox-close:hover,
+  .lightbox-prev:hover,
+  .lightbox-next:hover {
+    background: rgba(240, 238, 225, 0.25);
+  }
+
+  .lightbox-close:focus-visible,
+  .lightbox-prev:focus-visible,
+  .lightbox-next:focus-visible {
+    outline: 2px solid var(--color-olive);
+    outline-offset: 2px;
+  }
+
+  /* Counter */
+  .lightbox-counter {
+    position: absolute;
+    bottom: calc(-1 * var(--space-8));
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(240, 238, 225, 0.45);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* Responsive columns */
+  @media (max-width: 900px) {
+    .gallery-grid { columns: 2; }
+
+    .lightbox-prev { left: var(--space-3); }
+    .lightbox-next { right: var(--space-3); }
+    .lightbox-close { top: var(--space-3); right: var(--space-3); }
+  }
+
+  @media (max-width: 560px) {
+    .gallery-grid { columns: 1; }
+  }
+</style>
+
+<script define:vars={{ images, folder }}>
+  const dialog = document.querySelector('.lightbox');
+  const lightboxImg = dialog.querySelector('.lightbox-img');
+  const lightboxCaption = dialog.querySelector('.lightbox-caption');
+  const counter = dialog.querySelector('.lightbox-counter');
+  let currentIndex = 0;
+  let lastFocused = null;
+
+  function showImage(index) {
+    currentIndex = ((index % images.length) + images.length) % images.length;
+    const item = images[currentIndex];
+    lightboxImg.src = `${folder}${item.filename}`;
+    lightboxImg.alt = item.alt;
+    lightboxCaption.textContent = item.alt;
+    counter.textContent = `${currentIndex + 1} / ${images.length}`;
+  }
+
+  function openLightbox(index) {
+    lastFocused = document.activeElement;
+    showImage(index);
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+    dialog.querySelector('.lightbox-close').focus();
+  }
+
+  function closeLightbox() {
+    dialog.close();
+    document.body.style.overflow = '';
+    lastFocused?.focus();
+  }
+
+  // Trigger clicks
+  document.querySelectorAll('.gallery-trigger').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.index)));
+  });
+
+  // Controls
+  dialog.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  dialog.querySelector('.lightbox-prev').addEventListener('click', () => showImage(currentIndex - 1));
+  dialog.querySelector('.lightbox-next').addEventListener('click', () => showImage(currentIndex + 1));
+
+  // Click backdrop to close
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) closeLightbox(); });
+
+  // Keyboard
+  dialog.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); showImage(currentIndex - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); showImage(currentIndex + 1); }
+  });
+
+  // Restore scroll when native Escape closes the dialog
+  dialog.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    lastFocused?.focus();
+  });
+</script>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Alabama Mountain Property | The Bluffs — Overlooking Weiss Lake"
+  description="The Bluffs sits on a mountain peninsula extending into Weiss Lake in the Appalachian foothills of Northeast Alabama — comparable to the mountains of North Georgia, North Carolina, and Tennessee."
+  image="/assets/images/pages/mountain-lake.jpg"
+>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <img
+      src="/assets/images/pages/mountain-lake.jpg"
+      alt="Autumn lake view from an elevated overlook at The Bluffs on Weiss Lake"
+      width="1920"
+      height="800"
+      fetchpriority="high"
+    />
+    <div class="page-hero-overlay">
+      <h1 class="page-hero-title">Alabama Mountain Property at the Bluffs</h1>
+    </div>
+  </div>
+
+  <!-- BLOCK 1: Appalachian Foothills -->
+  <section class="section">
+    <div class="container">
+      <div class="split-block">
+        <div class="split-text prose">
+          <h2>The Appalachian Foothills of Northeast Alabama</h2>
+          <p>
+            Most people think of Georgia, North Carolina, or Tennessee when they think of
+            Appalachian mountain country — but Northeast Alabama is every bit as beautiful,
+            and considerably less crowded. The ridge lines, hardwood forests, and cool
+            seasons of Cherokee County rival anything you'll find across the state lines,
+            at a fraction of the price.
+          </p>
+          <p>
+            The Bluffs sits in this underappreciated landscape: elevated, forested, and
+            perched above one of the best bass-fishing lakes in the Southeast. It is a place
+            that feels remote but isn't — it simply hasn't been discovered yet.
+          </p>
+        </div>
+        <div class="split-image">
+          <img
+            src="/assets/images/pages/mountain-sunset.jpg"
+            alt="Panoramic sunset over the mountain ridgeline near Weiss Lake"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
+
+  <!-- BLOCK 2: Geology / Building -->
+  <section class="section">
+    <div class="container">
+      <div class="split-block reverse">
+        <div class="split-text prose">
+          <h2>The Coosa Valley — A Practical Place to Build</h2>
+          <p>
+            The Appalachian Valley, also known as the Coosa Valley in Alabama, sits atop a
+            limestone belt — a geology that produces flat, easy-to-build ridge tops even within
+            otherwise dramatic mountain terrain. This means that building a home at The Bluffs
+            is more straightforward than it might appear from the landscape. Homesites are
+            graded to make construction practical without sacrificing the elevation and views
+            that make them special.
+          </p>
+          <p>
+            The result is a community where dramatic scenery and buildable lots coexist —
+            a combination that's genuinely rare.
+          </p>
+        </div>
+        <div class="split-image">
+          <img
+            src="/assets/images/pages/mountain-aerial.jpg"
+            alt="Aerial satellite view of the Weiss Lake peninsula where The Bluffs is located"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
+
+  <!-- BLOCK 3: The Peninsula -->
+  <section class="section">
+    <div class="container">
+      <div class="split-block">
+        <div class="split-text prose">
+          <h2>A Mountain Finger in Weiss Lake</h2>
+          <p>
+            The Bluffs occupies a mountain peninsula — imagine a mountain finger poking out
+            into the 30,000-acre expanse of Weiss Lake. This geography means that most
+            homesites are surrounded by water on three sides, creating an extraordinary
+            sense of seclusion and panoramic views that a typical lakefront lot simply
+            cannot offer.
+          </p>
+          <p>
+            Weiss Lake itself stretches 52 miles and is widely regarded as the crappie
+            fishing capital of the world, with outstanding bass fishing as well.
+            The surrounding Piedmont Mountain Range frames the horizon on every clear day.
+          </p>
+          <p>
+            Located approximately 90 miles from Atlanta, 90 miles from Birmingham, and
+            80 miles from Chattanooga, The Bluffs is genuinely accessible from any of the
+            ABC Triangle metros — yet it feels like a world apart.
+          </p>
+          <a href="/homesites" class="btn btn-primary" style="margin-top: var(--space-4);">View Available Homesites</a>
+        </div>
+        <div class="split-image">
+          <img
+            src="/assets/images/pages/mountain-lake.jpg"
+            alt="Fall colors along the lake overlook at The Bluffs"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .split-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .split-block.reverse .split-text {
+    order: 2;
+  }
+
+  .split-block.reverse .split-image {
+    order: 1;
+  }
+
+  .split-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .split-text h2 {
+    margin-bottom: var(--space-5);
+  }
+
+  .split-text.prose p {
+    color: var(--color-charcoal-mid);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 860px) {
+    .split-block {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .split-block.reverse .split-text,
+    .split-block.reverse .split-image {
+      order: unset;
+    }
+
+    .split-image img {
+      height: 260px;
+    }
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PricingTable from '../components/PricingTable.astro';
+---
+
+<BaseLayout
+  title="Available Homes & Homesites | The Bluffs — Overlooking Weiss Lake"
+  description="Available lots at The Bluffs on Weiss Lake, Cedar Bluff, Alabama. Homesites from the $30s across Phase 1–3. Custom homes starting in the mid-$500s."
+  image="/assets/images/pages/plat-map.jpg"
+>
+
+  <!-- PAGE HEADER -->
+  <section class="section page-header">
+    <div class="container-narrow text-center">
+      <h1>Available Homes &amp; Homesites</h1>
+      <p class="page-intro">
+        Homesites available across three phases, each with water views and access to
+        the full community. Custom homes starting in the mid-$500s.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLAT MAP -->
+  <section class="section-sm plat-section">
+    <div class="container">
+      <h2 class="section-heading">Property Map</h2>
+      <div class="plat-wrap">
+        <img
+          src="/assets/images/pages/plat-map.jpg"
+          alt="Plat map of The Bluffs, showing Phase 1–3 lots on the Weiss Lake peninsula, Cedar Bluff, Cherokee County, Alabama"
+          width="1200"
+          height="900"
+          loading="lazy"
+          class="plat-img"
+        />
+        <p class="plat-caption">
+          The Bluffs — Overlooking Weiss Lake, Cedar Bluff, Cherokee County, Alabama.
+          An interactive lot map is coming soon.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
+
+  <!-- PRICING TABLE -->
+  <section class="section-sm pricing-section">
+    <div class="container">
+      <h2 class="section-heading">Available Lots &amp; Pricing</h2>
+      <p class="pricing-intro">
+        To update lot status (available, sold, under contract) or pricing, edit
+        <code>src/data/homesites.json</code> — no other changes needed.
+      </p>
+      <PricingTable />
+    </div>
+  </section>
+
+  <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
+
+  <!-- LISTING AGENTS -->
+  <section class="section-sm agents-section">
+    <div class="container">
+      <div class="agents-block">
+        <div class="agents-text">
+          <h2>Listed With</h2>
+          <p class="agents-firm">Maximum One Alabama Realtors</p>
+          <p>Cedar Bluff, Alabama</p>
+        </div>
+        <div class="agents-list">
+          <div class="agent-card">
+            <p class="agent-name">Sandy Cole, Realtor</p>
+            <p><a href="tel:+17705005159">(770) 500-5159</a></p>
+          </div>
+          <div class="agent-card">
+            <p class="agent-name">Jennifer Black, Realtor</p>
+            <p><a href="tel:+14702146196">(470) 214-6196</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm cta-band">
+    <div class="container text-center">
+      <p>Ready to find your lot?</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary">Contact Us</a>
+        <a href="/gallery/lots-5-6" class="btn btn-outline">View Lots 5 &amp; 6 Photos</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-10);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-size: var(--text-md);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+
+  /* Section headings */
+  .section-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+    color: var(--color-charcoal);
+  }
+
+  /* Plat map */
+  .plat-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .plat-img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-olive-light);
+  }
+
+  .plat-caption {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Pricing section */
+  .pricing-intro {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    margin-bottom: var(--space-6);
+  }
+
+  .pricing-intro code {
+    font-size: var(--text-xs);
+    background: var(--color-cream-dark);
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: var(--color-charcoal-mid);
+  }
+
+  /* Agents */
+  .agents-block {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+
+  .agents-text h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .agents-firm {
+    font-weight: 500;
+    font-size: var(--text-md);
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-1);
+  }
+
+  .agents-text p {
+    color: var(--color-charcoal-mid);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .agents-list {
+    display: flex;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .agent-card {
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--color-olive-light);
+    border-radius: var(--radius);
+    background: var(--color-cream-dark);
+  }
+
+  .agent-name {
+    font-weight: 500;
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-1);
+  }
+
+  .agent-card a {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .agent-card a:hover {
+    color: var(--color-olive);
+  }
+
+  /* CTA band */
+  .cta-band {
+    background: var(--color-cream-dark);
+    border-top: 1px solid var(--color-olive-light);
+  }
+
+  .cta-band p {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 800px) {
+    .agents-block {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+  }
+</style>

@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import testimonials from '../data/testimonials.json';
+---
+
+<BaseLayout
+  title="Testimonials | The Bluffs — Overlooking Weiss Lake"
+  description="Hear from homeowners at The Bluffs on Weiss Lake about their experience living in this private mountain lake community in Cedar Bluff, Alabama."
+>
+
+  <!-- PAGE HEADER -->
+  <section class="section page-header">
+    <div class="container-narrow text-center">
+      <h1>Testimonials of Weiss Lake Property Homeowners</h1>
+      <p class="page-intro">
+        The best way to understand The Bluffs is to hear from the people who chose to make it
+        their home. We'd love to show you the community in person — <a href="/contact">contact us</a> to
+        schedule a private tour at your convenience.
+      </p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-sm testimonials-section">
+    <div class="container-narrow">
+      <div class="testimonials-list">
+        {testimonials.map((t) => (
+          <article class="testimonial">
+            <blockquote>
+              <p>&#8220;{t.quote}&#8221;</p>
+            </blockquote>
+            <footer class="testimonial-attribution">
+              <span class="testimonial-name">{t.name}</span>
+              {(t.location || t.lot) && (
+                <span class="testimonial-meta">
+                  {t.location}{t.location && t.lot ? ' — ' : ''}{t.lot}
+                </span>
+              )}
+            </footer>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm cta-band">
+    <div class="container text-center">
+      <p>Experience The Bluffs for yourself.</p>
+      <div class="cta-buttons">
+        <a href="/contact" class="btn btn-primary">Schedule a Tour</a>
+        <a href="/homesites" class="btn btn-outline">View Available Homesites</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-12);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-size: var(--text-md);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+
+  .page-intro a {
+    color: var(--color-olive-dark);
+    text-underline-offset: 2px;
+  }
+
+  .testimonials-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .testimonial {
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .testimonial:last-child {
+    border-bottom: none;
+  }
+
+  .testimonial blockquote {
+    border-left: none;
+    padding: 0;
+    margin: 0 0 var(--space-4) 0;
+  }
+
+  .testimonial blockquote p {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-style: italic;
+    color: var(--color-charcoal);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .testimonial-attribution {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .testimonial-name {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-charcoal);
+  }
+
+  .testimonial-meta {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+  }
+
+  /* CTA band */
+  .cta-band {
+    background: var(--color-cream-dark);
+    border-top: 1px solid var(--color-olive-light);
+  }
+
+  .cta-band p {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

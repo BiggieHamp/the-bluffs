@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BaseLayout
+  title="Contact Us | The Bluffs — Overlooking Weiss Lake"
+  description="Contact The Bluffs to learn about available homesites and homes, schedule a tour, or request building guidelines and community plans."
+>
+
+  <!-- PAGE HEADER -->
+  <section class="section page-header">
+    <div class="container-narrow text-center">
+      <h1>Contact Us</h1>
+      <p class="page-intro">
+        Whether you're ready to visit, have questions about a specific homesite, or want to
+        learn more about building guidelines and community plans — we'd love to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT GRID -->
+  <section class="section-sm contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Form column -->
+        <div class="contact-form-col">
+          <ContactForm />
+        </div>
+
+        <!-- Info column -->
+        <aside class="contact-info-col">
+
+          <div class="contact-info-block">
+            <p class="info-label">Developers</p>
+            <address class="contact-address">
+              <p>John &amp; Patsy Hyatt</p>
+              <p>The Bluffs, County Road 767</p>
+              <p>Cedar Bluff, AL 35959</p>
+              <p><a href="tel:+14044216946">(404) 421-6946</a></p>
+              <p><a href="mailto:johnwhyatt@bellsouth.net">johnwhyatt@bellsouth.net</a></p>
+            </address>
+          </div>
+
+          <div class="contact-info-block">
+            <p class="info-label">Builder &amp; Developer</p>
+            <address class="contact-address">
+              <p>Wade Chappell</p>
+              <p>Chappell Construction Group</p>
+              <p><a href="tel:+14049649554">(404) 964-9554</a></p>
+              <p><a href="mailto:wade@chappellcg.com">wade@chappellcg.com</a></p>
+            </address>
+          </div>
+
+          <div class="contact-info-block">
+            <p class="info-label">Listing Agents</p>
+            <p class="agent-firm">Maximum One Alabama Realtors</p>
+            <p>Cedar Bluff, AL</p>
+            <div class="agent-list">
+              <div>
+                <p class="agent-name">Sandy Cole</p>
+                <p><a href="tel:+17705005159">(770) 500-5159</a></p>
+              </div>
+              <div>
+                <p class="agent-name">Jennifer Black</p>
+                <p><a href="tel:+14702146196">(470) 214-6196</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <p class="info-label">Office Hours</p>
+            <p>Monday – Friday</p>
+            <p class="hours">10:00 am – 6:00 pm</p>
+            <p class="hours-note">Tours available by appointment.</p>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-10);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-size: var(--text-md);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+
+  /* Two-column layout */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  /* Info column */
+  .contact-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-info-block {
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .contact-info-block:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    margin-bottom: var(--space-3);
+  }
+
+  .contact-address {
+    font-style: normal;
+    line-height: 1.9;
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+  }
+
+  .contact-address a {
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .contact-address a:hover {
+    color: var(--color-olive);
+  }
+
+  .agent-firm {
+    font-weight: 500;
+    font-size: var(--text-sm);
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-1);
+  }
+
+  .agent-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+  }
+
+  .agent-name {
+    font-weight: 500;
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-1);
+  }
+
+  .agent-list a {
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .agent-list a:hover {
+    color: var(--color-olive);
+  }
+
+  .hours {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-charcoal);
+    margin: var(--space-1) 0 var(--space-2);
+  }
+
+  .hours-note {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info-col {
+      order: -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 var(--space-8);
+    }
+
+    .contact-info-block {
+      border-bottom: 1px solid var(--color-olive-light);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact-info-col {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

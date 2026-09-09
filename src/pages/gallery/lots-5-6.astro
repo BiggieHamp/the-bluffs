@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import galleryData from '../../data/gallery.json';
+---
+
+<BaseLayout
+  title="Lots 5 & 6 | Gallery | The Bluffs — Overlooking Weiss Lake"
+  description="Photos of Lots 5 and 6 at The Bluffs on Weiss Lake — lakefront homesites with panoramic water views in Cedar Bluff, Alabama."
+  image="/assets/images/lots-5-6/photo-01.jpg"
+>
+
+  <!-- PAGE HEADER -->
+  <section class="section-sm page-header">
+    <div class="container-narrow text-center">
+      <h1>Lots 5 &amp; 6</h1>
+      <p class="page-intro">
+        A closer look at these premium homesites. Click any photo to view fullsize.
+      </p>
+    </div>
+  </section>
+
+  <!-- LOT DETAILS -->
+  <section class="section-sm lot-details">
+    <div class="container">
+      <div class="lot-cards">
+        <div class="lot-card">
+          <p class="lot-card-label">Lot 5</p>
+          <p class="lot-card-detail"><span>Acreage</span> 2.43 ac.</p>
+          <p class="lot-card-detail"><span>Price</span> $65,000</p>
+          <p class="lot-card-detail"><span>Phase</span> 1</p>
+          <a href="/contact" class="btn btn-primary lot-card-cta">Inquire About This Lot</a>
+        </div>
+        <div class="lot-card">
+          <p class="lot-card-label">Lot 6</p>
+          <p class="lot-card-detail"><span>Acreage</span> 2.91 ac.</p>
+          <p class="lot-card-detail"><span>Price</span> $75,000</p>
+          <p class="lot-card-detail"><span>Phase</span> 1</p>
+          <a href="/contact" class="btn btn-primary lot-card-cta">Inquire About This Lot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section-sm gallery-section">
+    <div class="container">
+      <Gallery
+        images={galleryData.lots56}
+        folder="/assets/images/lots-5-6/"
+      />
+    </div>
+  </section>
+
+  <!-- BACK LINK -->
+  <section class="section-sm back-band">
+    <div class="container">
+      <a href="/gallery" class="back-link">&#8592; Back to Gallery</a>
+      <a href="/homesites" class="btn btn-outline">View All Available Lots</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-10);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-size: var(--text-md);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+
+  /* Lot detail cards */
+  .lot-details {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-10);
+  }
+
+  .lot-cards {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .lot-card {
+    background: var(--color-cream-dark);
+    border: 1px solid var(--color-olive-light);
+    border-radius: var(--radius);
+    padding: var(--space-6) var(--space-8);
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .lot-card-label {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-2);
+  }
+
+  .lot-card-detail {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+    display: flex;
+    gap: var(--space-2);
+    align-items: baseline;
+    margin: 0;
+  }
+
+  .lot-card-detail span {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    min-width: 60px;
+  }
+
+  .lot-card-cta {
+    margin-top: var(--space-4);
+    text-align: center;
+  }
+
+  /* Back band */
+  .back-band {
+    display: flex;
+    align-items: center;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+    border-top: 1px solid var(--color-olive-light);
+  }
+
+  .back-band .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .back-link {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+  }
+
+  .back-link:hover {
+    color: var(--color-olive);
+  }
+</style>

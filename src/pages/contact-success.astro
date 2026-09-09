@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Message Sent | The Bluffs — Overlooking Weiss Lake"
+  description="Thank you for contacting The Bluffs. We'll be in touch soon."
+  noindex={true}
+>
+  <section class="section success-section">
+    <div class="container-narrow text-center">
+      <div class="success-icon" aria-hidden="true">&#10003;</div>
+      <h1>Message Sent</h1>
+      <p class="success-text">
+        Thank you for reaching out. We'll be in touch with you shortly.
+      </p>
+      <p class="success-subtext">
+        In the meantime, feel free to explore the community.
+      </p>
+      <div class="success-actions">
+        <a href="/gallery" class="btn btn-primary">View Gallery</a>
+        <a href="/homesites" class="btn btn-outline">See Available Homesites</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .success-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-olive-light);
+    color: var(--color-olive-dark);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-6);
+  }
+
+  .success-section h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .success-text {
+    font-size: var(--text-lg);
+    color: var(--color-charcoal-mid);
+    margin-bottom: var(--space-2);
+  }
+
+  .success-subtext {
+    font-size: var(--text-base);
+    color: var(--color-charcoal-light);
+    margin-bottom: var(--space-10);
+  }
+
+  .success-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

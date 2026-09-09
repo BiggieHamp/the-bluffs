@@ -1,0 +1,25 @@
+{
+  "main": [
+    { "filename": "photo-01.jpg", "alt": "Elevated view of Weiss Lake from The Bluffs community" },
+    { "filename": "photo-02.jpg", "alt": "Custom home exterior at The Bluffs, cedar-shake craftsman style" },
+    { "filename": "photo-03.jpg", "alt": "Panoramic lake and mountain view from a homesite at The Bluffs" },
+    { "filename": "photo-04.jpg", "alt": "Archival landscape photograph of Weiss Lake area, 2011 (photo: Tara Strickland)" },
+    { "filename": "photo-05.jpg", "alt": "Sunset over the private fishing pond at The Bluffs" },
+    { "filename": "photo-06.jpg", "alt": "Home construction in progress at The Bluffs" },
+    { "filename": "photo-07.jpg", "alt": "Forest and lake scenery on the mountain peninsula" },
+    { "filename": "photo-08.jpg", "alt": "Finished custom home with mountain and lake views at The Bluffs" },
+    { "filename": "photo-09.jpg", "alt": "Aerial view of the Weiss Lake peninsula and surrounding landscape" },
+    { "filename": "photo-10.jpg", "alt": "Homesite lot with panoramic Weiss Lake views" },
+    { "filename": "photo-11.jpg", "alt": "Lot 212 — lakefront homesite at The Bluffs" },
+    { "filename": "photo-12.jpg", "alt": "Property view showing natural wooded setting at The Bluffs" },
+    { "filename": "photo-13.jpg", "alt": "Weiss Lake shoreline from The Bluffs community" }
+  ],
+  "lots56": [
+    { "filename": "photo-01.jpg", "alt": "Lots 5 & 6 — lake view from homesite" },
+    { "filename": "photo-02.jpg", "alt": "Lots 5 & 6 — wooded setting and natural surroundings" },
+    { "filename": "photo-03.jpg", "alt": "Lots 5 & 6 — elevated view of Weiss Lake" },
+    { "filename": "photo-04.jpg", "alt": "Lots 5 & 6 — property boundary and terrain" },
+    { "filename": "photo-05.jpg", "alt": "Lots 5 & 6 — panoramic mountain and lake scenery" },
+    { "filename": "photo-06.jpg", "alt": "Lots 5 & 6 — access road and lot overview" }
+  ]
+}

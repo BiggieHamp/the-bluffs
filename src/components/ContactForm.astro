@@ -1,0 +1,208 @@
+---
+// Netlify Forms: form is detected at build time via the `data-netlify` attribute.
+// Submissions appear in the Netlify dashboard → Forms.
+// Email notifications can be configured there without any code changes.
+---
+
+<form
+  class="contact-form"
+  name="contact"
+  method="POST"
+  action="/contact-success"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  novalidate
+>
+  <!-- Hidden fields required by Netlify Forms -->
+  <input type="hidden" name="form-name" value="contact" />
+
+  <!-- Honeypot spam field — hidden from real users -->
+  <p class="sr-only" aria-hidden="true">
+    <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <div class="form-row form-row-2col">
+    <div class="form-group">
+      <label for="first-name" class="form-label">First Name <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="first-name"
+        type="text"
+        name="first-name"
+        class="form-input"
+        required
+        autocomplete="given-name"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="last-name" class="form-label">Last Name <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="last-name"
+        type="text"
+        name="last-name"
+        class="form-input"
+        required
+        autocomplete="family-name"
+        aria-required="true"
+      />
+    </div>
+  </div>
+
+  <div class="form-row form-row-2col">
+    <div class="form-group">
+      <label for="email" class="form-label">Email Address <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        class="form-input"
+        required
+        autocomplete="email"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone" class="form-label">Phone</label>
+      <input
+        id="phone"
+        type="tel"
+        name="phone"
+        class="form-input"
+        autocomplete="tel"
+        placeholder="(xxx) xxx-xxxx"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="subject" class="form-label">Subject <span class="required" aria-hidden="true">*</span></label>
+    <input
+      id="subject"
+      type="text"
+      name="subject"
+      class="form-input"
+      required
+      aria-required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="message" class="form-label">Message <span class="required" aria-hidden="true">*</span></label>
+    <textarea
+      id="message"
+      name="message"
+      class="form-input form-textarea"
+      rows="6"
+      required
+      aria-required="true"
+    ></textarea>
+  </div>
+
+  <p class="form-required-note"><span class="required" aria-hidden="true">*</span> Required fields</p>
+
+  <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+</form>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .form-row {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .form-row-2col > .form-group {
+    flex: 1;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-charcoal);
+    letter-spacing: 0.01em;
+  }
+
+  .required {
+    color: var(--color-olive);
+    margin-left: 2px;
+  }
+
+  .form-input {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-charcoal);
+    background: var(--color-white);
+    border: 1px solid rgba(140, 137, 100, 0.35);
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    width: 100%;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    appearance: none;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-olive);
+    box-shadow: 0 0 0 3px rgba(140, 137, 100, 0.15);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-charcoal-light);
+  }
+
+  .form-input:invalid:not(:placeholder-shown) {
+    border-color: #c0392b;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  .form-required-note {
+    font-size: var(--text-xs);
+    color: var(--color-charcoal-light);
+    margin: 0;
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    padding: var(--space-3) var(--space-10);
+  }
+
+  @media (max-width: 600px) {
+    .form-row-2col {
+      flex-direction: column;
+    }
+
+    .form-submit {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

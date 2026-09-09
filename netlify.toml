@@ -1,0 +1,23 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/services-6-1"
+  to = "/area-activities"
+  status = 301
+
+[[redirects]]
+  from = "/appointments-4"
+  to = "/nearby-towns"
+  status = 301
+
+[[redirects]]
+  from = "/new-page"
+  to = "/testimonials"
+  status = 301
+
+[[redirects]]
+  from = "/new-page-1"
+  to = "/homesites"
+  status = 301

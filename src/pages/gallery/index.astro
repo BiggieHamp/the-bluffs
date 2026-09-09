@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import galleryData from '../../data/gallery.json';
+---
+
+<BaseLayout
+  title="Gallery | The Bluffs — Overlooking Weiss Lake"
+  description="Photos of The Bluffs community on Weiss Lake — lake views, finished homes, construction, trails, and natural scenery in Cedar Bluff, Alabama."
+  image="/assets/images/gallery/photo-01.jpg"
+>
+
+  <!-- PAGE HEADER -->
+  <section class="section-sm page-header">
+    <div class="container-narrow text-center">
+      <h1>Gallery</h1>
+      <p class="page-intro">
+        A look at the land, the lake, and the homes that make up The Bluffs community.
+        Click any photo to view fullsize.
+      </p>
+    </div>
+  </section>
+
+  <!-- GALLERY GRID -->
+  <section class="section-sm gallery-section">
+    <div class="container">
+      <Gallery
+        images={galleryData.main}
+        folder="/assets/images/gallery/"
+      />
+    </div>
+  </section>
+
+  <!-- LINK TO LOTS 5 & 6 -->
+  <section class="section-sm lots-link-band">
+    <div class="container text-center">
+      <p>Interested in a specific listing?</p>
+      <a href="/gallery/lots-5-6" class="btn btn-outline">View Lots 5 &amp; 6 Photos</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    border-bottom: 1px solid var(--color-olive-light);
+    padding-bottom: var(--space-10);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-size: var(--text-md);
+    color: var(--color-charcoal-mid);
+    margin: 0;
+  }
+
+  .lots-link-band {
+    background: var(--color-cream-dark);
+    border-top: 1px solid var(--color-olive-light);
+  }
+
+  .lots-link-band p {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+</style>
