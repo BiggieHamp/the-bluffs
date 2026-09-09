@@ -40,15 +40,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section-sm video-section" aria-label="Community walkthrough video">
     <div class="container">
       <div class="video-wrapper">
-        <video
-          controls
-          preload="metadata"
-          poster="/assets/images/video-poster.jpg"
-          aria-label="The Bluffs community drive-through video"
-        >
-          <source src="/assets/video/hero.webm" type="video/webm" />
-          Your browser does not support HTML5 video.
-        </video>
+        <iframe
+          src="https://www.youtube.com/embed/U709m7_CYrk?si=hlEO61lBist36rMS"
+          title="The Bluffs community walkthrough video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </section>
@@ -147,16 +146,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .video-wrapper {
+    position: relative;
     max-width: 960px;
     margin: 0 auto;
+    padding-bottom: min(56.25%, 540px);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
   }
 
-  .video-wrapper video {
+  .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
   }
 
