@@ -1,5 +1,5 @@
 ---
-const pathname = Astro.url.pathname;
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const aboutPaths = ['/our-vision', '/amenities', '/area-activities', '/nearby-towns', '/testimonials', '/our-building-team'];
 const isAbout = aboutPaths.some(p => pathname === p);
