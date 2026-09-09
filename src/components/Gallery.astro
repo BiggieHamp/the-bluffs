@@ -139,6 +139,13 @@ const { images, folder } = Astro.props;
     border-radius: var(--radius);
     padding: 0;
     overflow: visible;
+  }
+
+  .lightbox:not([open]) {
+    display: none;
+  }
+
+  .lightbox[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,11 +154,6 @@ const { images, folder } = Astro.props;
 
   .lightbox::backdrop {
     background: rgba(0, 0, 0, 0.88);
-  }
-
-  /* Prevent default [open] display:block from overriding flex */
-  .lightbox[open] {
-    display: flex;
   }
 
   .lightbox-figure {
@@ -200,11 +202,12 @@ const { images, folder } = Astro.props;
   }
 
   .lightbox-close {
-    top: calc(-1 * var(--space-6));
-    right: calc(-1 * var(--space-6));
+    top: var(--space-3);
+    right: var(--space-3);
     width: 44px;
     height: 44px;
     background: rgba(240, 238, 225, 0.15);
+    z-index: 1;
   }
 
   .lightbox-prev,
@@ -249,7 +252,6 @@ const { images, folder } = Astro.props;
 
     .lightbox-prev { left: var(--space-3); }
     .lightbox-next { right: var(--space-3); }
-    .lightbox-close { top: var(--space-3); right: var(--space-3); }
   }
 
   @media (max-width: 560px) {
