@@ -1,13 +1,13 @@
 [
-  { "id": "lot-5",   "lot": "Lot 5",   "phase": 1, "acres": 2.43, "price": 65000,  "status": "available", "notes": "" },
-  { "id": "lot-6",   "lot": "Lot 6",   "phase": 1, "acres": 2.91, "price": 75000,  "status": "available", "notes": "" },
+  { "id": "lot-5",   "lot": "Lot 5",   "phase": 1, "acres": 2.43, "price": 65000,  "status": "available", "description": "A spacious 2.43-acre homesite positioned along the southern ridge with sweeping Weiss Lake views. The gentle slope is well-suited for a walkout basement design, with mature hardwoods providing natural privacy on all sides.", "photos": ["/assets/images/lots-5-6/photo-01.jpg", "/assets/images/lots-5-6/photo-02.jpg", "/assets/images/lots-5-6/photo-03.jpg"], "notes": "" },
+  { "id": "lot-6",   "lot": "Lot 6",   "phase": 1, "acres": 2.91, "price": 75000,  "status": "available", "description": "Among the largest available Phase 1 lots at 2.91 acres. Open ridge terrain with expansive lake and mountain views from multiple orientations. Excellent elevation for panoramic sunset exposures.", "photos": ["/assets/images/lots-5-6/photo-04.jpg", "/assets/images/lots-5-6/photo-05.jpg", "/assets/images/lots-5-6/photo-06.jpg"], "notes": "" },
   { "id": "lot-46",  "lot": "Lot 46",  "phase": 1, "acres": 0.91, "price": 45000,  "status": "available", "notes": "" },
   { "id": "lot-52",  "lot": "Lot 52",  "phase": 1, "acres": 3.24, "price": 80000,  "status": "available", "notes": "" },
   { "id": "lot-61",  "lot": "Lot 61",  "phase": 1, "acres": 2.15, "price": 55000,  "status": "available", "notes": "" },
   { "id": "lot-62",  "lot": "Lot 62",  "phase": 1, "acres": 1.73, "price": 80000,  "status": "available", "notes": "" },
   { "id": "lot-70",  "lot": "Lot 70",  "phase": 1, "acres": 2.69, "price": 30000,  "status": "available", "notes": "" },
 
-  { "id": "lot-205", "lot": "Lot 205", "phase": 2, "acres": 1.02, "price": 155000, "status": "available", "notes": "" },
+  { "id": "lot-205", "lot": "Lot 205", "phase": 2, "acres": 1.02, "price": 155000, "status": "available", "description": "A premier upper-phase homesite with morning sun exposure and treetop views toward the Little River Canyon corridor. Positioned along the community's highest road with easy access to Weiss Lake.", "photos": [], "notes": "" },
   { "id": "lot-206", "lot": "Lot 206", "phase": 2, "acres": 1.92, "price": 140000, "status": "available", "notes": "" },
   { "id": "lot-212", "lot": "Lot 212", "phase": 2, "acres": 1.99, "price": 90000,  "status": "available", "notes": "" },
   { "id": "lot-213", "lot": "Lot 213", "phase": 2, "acres": 1.79, "price": 90000,  "status": "available", "notes": "" },
@@ -25,9 +25,9 @@
   { "id": "lot-230", "lot": "Lot 230", "phase": 2, "acres": 1.32, "price": 60000,  "status": "available", "notes": "" },
   { "id": "lot-231", "lot": "Lot 231", "phase": 2, "acres": 1.32, "price": 65000,  "status": "available", "notes": "" },
   { "id": "lot-232", "lot": "Lot 232", "phase": 2, "acres": 1.24, "price": 70000,  "status": "available", "notes": "" },
-  { "id": "lot-292", "lot": "Lot 292", "phase": 2, "acres": 1.80, "price": 150000, "status": "available", "notes": "" },
+  { "id": "lot-292", "lot": "Lot 292", "phase": 2, "acres": 1.80, "price": 150000, "status": "available", "description": "A premium 1.80-acre homesite at one of the highest elevation points in the Phase 2 section. Exceptional 270° views spanning Weiss Lake and the surrounding Piedmont Mountains. Private cul-de-sac setting.", "photos": [], "notes": "" },
 
-  { "id": "lot-301", "lot": "Lot 301", "phase": 3, "acres": 1.82, "price": 85000,  "status": "available", "notes": "" },
+  { "id": "lot-301", "lot": "Lot 301", "phase": 3, "acres": 1.82, "price": 85000,  "status": "available", "description": "Phase 3 homesite with direct Weiss Lake view frontage. 1.82 acres with a relatively level building pad and quiet cul-de-sac positioning. One of the most accessible lots in the newest phase of the community.", "photos": [], "notes": "" },
   { "id": "lot-302", "lot": "Lot 302", "phase": 3, "acres": 2.86, "price": 95000,  "status": "available", "notes": "" },
   { "id": "lot-312", "lot": "Lot 312", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "notes": "" },
   { "id": "lot-313", "lot": "Lot 313", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "notes": "" }

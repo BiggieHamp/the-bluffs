@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingTable from '../components/PricingTable.astro';
+import homesitesData from '../data/homesites.json';
 ---
 
 <BaseLayout
@@ -20,26 +21,72 @@ import PricingTable from '../components/PricingTable.astro';
     </div>
   </section>
 
-  <!-- PLAT MAP -->
+  <!-- PLAT MAP — Interactive -->
   <section class="section-sm plat-section">
     <div class="container">
       <h2 class="section-heading">Property Map</h2>
+      <p class="plat-intro">Click a highlighted lot to view details.</p>
       <div class="plat-wrap">
-        <img
-          src="/assets/images/pages/plat-map.jpg"
-          alt="Plat map of The Bluffs, showing Phase 1–3 lots on the Weiss Lake peninsula, Cedar Bluff, Cherokee County, Alabama"
-          width="1200"
-          height="900"
-          loading="lazy"
-          class="plat-img"
-        />
+        <div class="plat-map-container">
+          <img
+            src="/assets/images/pages/plat-map.jpg"
+            alt="Plat map of The Bluffs, showing Phase 1–3 lots on the Weiss Lake peninsula, Cedar Bluff, Cherokee County, Alabama"
+            width="830"
+            height="1170"
+            loading="lazy"
+            class="plat-img"
+            id="plat-img"
+          />
+          <!-- SVG overlay — coordinates in 830×1170 space matching image dimensions.
+               Demo shows 5 lots; remaining lot polygons to be traced from official plat. -->
+          <svg class="plat-svg" viewBox="0 0 830 1170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon class="lot-poly" data-lot="lot-5"   points="590,1000 675,1000 675,1105 590,1105" />
+            <polygon class="lot-poly" data-lot="lot-6"   points="675,975  758,975  758,1080 675,1080" />
+            <polygon class="lot-poly" data-lot="lot-205" points="198,258  282,258  282,348  198,348"  />
+            <polygon class="lot-poly" data-lot="lot-292" points="428,362  510,362  510,448  428,448"  />
+            <polygon class="lot-poly" data-lot="lot-301" points="653,132  732,132  732,224  653,224"  />
+          </svg>
+        </div>
         <p class="plat-caption">
           The Bluffs — Overlooking Weiss Lake, Cedar Bluff, Cherokee County, Alabama.
-          An interactive lot map is coming soon.
+          <em>Demo: 5 of 30 lots interactive. Full map in progress.</em>
         </p>
       </div>
     </div>
   </section>
+
+  <!-- LOT DETAIL PANEL -->
+  <aside class="lot-panel" id="lot-panel" aria-label="Lot details" aria-hidden="true">
+    <div class="lot-panel-head">
+      <div>
+        <p class="panel-phase" id="panel-phase"></p>
+        <h3 class="panel-title" id="panel-title"></h3>
+      </div>
+      <button class="panel-close" id="panel-close" aria-label="Close lot details">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="panel-photos" id="panel-photos"></div>
+    <div class="panel-stats">
+      <div class="panel-stat">
+        <span class="panel-stat-label">Acreage</span>
+        <span class="panel-stat-value" id="panel-acres"></span>
+      </div>
+      <div class="panel-stat">
+        <span class="panel-stat-label">List Price</span>
+        <span class="panel-stat-value" id="panel-price"></span>
+      </div>
+      <div class="panel-stat">
+        <span class="panel-stat-label">Status</span>
+        <span class="panel-stat-value" id="panel-status"></span>
+      </div>
+    </div>
+    <p class="panel-desc" id="panel-desc"></p>
+    <a href="/contact" class="btn btn-primary panel-cta" id="panel-cta">Contact Us About This Lot</a>
+  </aside>
+  <div class="lot-panel-backdrop" id="lot-panel-backdrop"></div>
 
   <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
 
@@ -117,17 +164,58 @@ import PricingTable from '../components/PricingTable.astro';
   }
 
   /* Plat map */
+  .plat-intro {
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    margin-bottom: var(--space-4);
+  }
+
   .plat-wrap {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
   }
 
+  .plat-map-container {
+    position: relative;
+    display: block;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-olive-light);
+    overflow: hidden;
+  }
+
   .plat-img {
     width: 100%;
     height: auto;
-    border-radius: var(--radius);
-    border: 1px solid var(--color-olive-light);
+    display: block;
+  }
+
+  /* SVG overlay sits exactly on top of the image */
+  .plat-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .lot-poly {
+    fill: rgba(140, 137, 100, 0.25);
+    stroke: var(--color-olive);
+    stroke-width: 3;
+    cursor: pointer;
+    transition: fill 150ms ease;
+  }
+
+  .lot-poly:hover,
+  .lot-poly:focus {
+    fill: rgba(140, 137, 100, 0.55);
+    outline: none;
+  }
+
+  .lot-poly.selected {
+    fill: rgba(140, 137, 100, 0.65);
+    stroke-width: 4;
   }
 
   .plat-caption {
@@ -135,6 +223,175 @@ import PricingTable from '../components/PricingTable.astro';
     color: var(--color-charcoal-light);
     text-align: center;
     margin: 0;
+  }
+
+  /* ── Lot detail panel ── */
+  .lot-panel {
+    position: fixed;
+    top: var(--nav-height);
+    right: 0;
+    bottom: 0;
+    width: 360px;
+    background: var(--color-cream);
+    border-left: 1px solid var(--color-olive-light);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.10);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 300ms ease;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .lot-panel.open {
+    transform: translateX(0);
+  }
+
+  .lot-panel-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 28, 26, 0.35);
+    z-index: 199;
+  }
+
+  .lot-panel-backdrop.open {
+    display: block;
+  }
+
+  .lot-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--color-olive-light);
+    position: sticky;
+    top: 0;
+    background: var(--color-cream);
+    z-index: 1;
+  }
+
+  .panel-phase {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    margin-bottom: var(--space-1);
+  }
+
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--color-charcoal);
+  }
+
+  .panel-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-charcoal-light);
+    padding: var(--space-1);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: color var(--transition);
+  }
+
+  .panel-close:hover { color: var(--color-charcoal); }
+
+  /* Photos */
+  .panel-photos {
+    width: 100%;
+    min-height: 200px;
+    background: var(--color-cream-dark);
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+  }
+
+  .panel-photos img {
+    flex: 1;
+    min-width: 0;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .panel-photo-placeholder {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-charcoal-light);
+    font-size: var(--text-sm);
+    font-style: italic;
+  }
+
+  /* Stats row */
+  .panel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .panel-stat {
+    padding: var(--space-4) var(--space-5);
+    border-right: 1px solid var(--color-olive-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .panel-stat:last-child { border-right: none; }
+
+  .panel-stat-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-light);
+  }
+
+  .panel-stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: var(--color-charcoal);
+  }
+
+  /* Description + CTA */
+  .panel-desc {
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+    line-height: 1.8;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .panel-cta {
+    margin: var(--space-6);
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .lot-panel {
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 75vh;
+      transform: translateY(100%);
+      border-left: none;
+      border-top: 1px solid var(--color-olive-light);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .lot-panel.open {
+      transform: translateY(0);
+    }
   }
 
   /* Pricing section */
@@ -234,3 +491,74 @@ import PricingTable from '../components/PricingTable.astro';
     }
   }
 </style>
+
+<script define:vars={{ homesitesData }}>
+  const lots = {};
+  homesitesData.forEach(lot => { lots[lot.id] = lot; });
+
+  const panel     = document.getElementById('lot-panel');
+  const backdrop  = document.getElementById('lot-panel-backdrop');
+  const closeBtn  = document.getElementById('panel-close');
+  let activePoly  = null;
+
+  const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const statusLabel = { available: 'Available', sold: 'Sold', contract: 'Under Contract' };
+
+  function openPanel(lotId, poly) {
+    const lot = lots[lotId];
+    if (!lot) return;
+
+    // Deselect previous polygon
+    if (activePoly) activePoly.classList.remove('selected');
+    activePoly = poly;
+    poly.classList.add('selected');
+
+    document.getElementById('panel-phase').textContent  = `Phase ${lot.phase}`;
+    document.getElementById('panel-title').textContent  = lot.lot;
+    document.getElementById('panel-acres').textContent  = `${lot.acres} ac`;
+    document.getElementById('panel-price').textContent  = lot.price ? fmt.format(lot.price) : 'Contact us';
+
+    const statusEl = document.getElementById('panel-status');
+    statusEl.textContent  = statusLabel[lot.status] || lot.status;
+    statusEl.className    = `badge badge-${lot.status}`;
+
+    const photosEl = document.getElementById('panel-photos');
+    const photos   = lot.photos || [];
+    photosEl.innerHTML = photos.length
+      ? photos.map(src => `<img src="${src}" alt="${lot.lot}" loading="lazy" />`).join('')
+      : `<div class="panel-photo-placeholder">Photos coming soon</div>`;
+
+    const descEl  = document.getElementById('panel-desc');
+    descEl.textContent = lot.description || '';
+    descEl.style.display = lot.description ? '' : 'none';
+
+    document.getElementById('panel-cta').href = `/contact?lot=${encodeURIComponent(lot.lot)}`;
+
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    backdrop.classList.add('open');
+    closeBtn.focus();
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    backdrop.classList.remove('open');
+    if (activePoly) { activePoly.classList.remove('selected'); activePoly = null; }
+  }
+
+  document.querySelectorAll('.lot-poly').forEach(poly => {
+    const lotId = poly.dataset.lot;
+    poly.setAttribute('tabindex', '0');
+    poly.setAttribute('role', 'button');
+    poly.setAttribute('aria-label', `View details for ${lotId.replace('lot-', 'Lot ')}`);
+    poly.addEventListener('click', () => openPanel(lotId, poly));
+    poly.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPanel(lotId, poly); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closePanel);
+  backdrop.addEventListener('click', closePanel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
