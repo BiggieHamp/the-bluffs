@@ -76,8 +76,9 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background: var(--color-charcoal);
-    color: rgba(240, 238, 225, 0.75);
+    background: var(--color-cream);
+    color: var(--color-charcoal-mid);
+    border-top: 1px solid var(--color-olive-light);
     margin-top: auto;
   }
 
@@ -111,13 +112,13 @@ const year = new Date().getFullYear();
   }
 
   .footer-address a {
-    color: rgba(240, 238, 225, 0.75);
+    color: var(--color-charcoal-mid);
     text-decoration: none;
     transition: color var(--transition);
   }
 
   .footer-address a:hover {
-    color: var(--color-cream);
+    color: var(--color-charcoal);
   }
 
   .footer-col-right {
@@ -143,14 +144,14 @@ const year = new Date().getFullYear();
   }
 
   .footer-social-link {
-    color: rgba(240, 238, 225, 0.6);
+    color: var(--color-charcoal-light);
     display: flex;
     text-decoration: none;
     transition: color var(--transition);
   }
 
   .footer-social-link:hover {
-    color: var(--color-cream);
+    color: var(--color-charcoal);
   }
 
   .footer-cta {
@@ -166,7 +167,7 @@ const year = new Date().getFullYear();
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(240, 238, 225, 0.1);
+    border-top: 1px solid var(--color-olive-light);
     padding-top: var(--space-6);
     display: flex;
     justify-content: space-between;
@@ -178,7 +179,7 @@ const year = new Date().getFullYear();
   .footer-credit,
   .footer-copy {
     font-size: var(--text-xs);
-    color: rgba(240, 238, 225, 0.45);
+    color: var(--color-charcoal-light);
     margin: 0;
     letter-spacing: 0.02em;
   }
