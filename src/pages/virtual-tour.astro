@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tours = [
+  {
+    id: 'tour-lot-46',
+    label: 'Lot 46',
+    description: 'An immersive 360° view from Lot 46. Drag or swipe to pan across the landscape and lake vistas.',
+    url: 'https://cloud-va.insta360.com/share/va/4E207g3X9C0u1I6Y0242479104/player?mediaId=427388274743443456',
+  },
+  {
+    id: 'tour-lot-205-206',
+    label: 'Lots 205 & 206',
+    description: 'Explore Lots 205 and 206 in full 360°. Upper-phase homesites with treetop views toward the Little River Canyon corridor.',
+    url: 'https://cloud-va.insta360.com/share/va/4B2Q7I3c9F9A4g9S3097361408/player?mediaId=427388263464964096',
+  },
+  {
+    id: 'tour-lot-219-221',
+    label: 'Lots 219, 220 & 221',
+    description: 'A 360° look across Lots 219, 220, and 221 — Phase 2 homesites with Weiss Lake views and natural surroundings.',
+    url: 'https://cloud-va.insta360.com/share/va/402H7J3Q9i8v955O2824864768/player?mediaId=427388310256615424',
+  },
+  {
+    id: 'tour-lot-292',
+    label: 'Lot 292',
+    description: 'Experience Lot 292\'s exceptional 270° panorama spanning Weiss Lake and the surrounding Piedmont Mountains from one of the community\'s highest elevations.',
+    url: 'https://cloud-va.insta360.com/share/va/4c2S7g379E923O9E5550433280/player?mediaId=427388283673120768',
+  },
+];
+---
+
+<BaseLayout
+  title="Virtual Tour — The Bluffs"
+  description="Explore The Bluffs in immersive 360° photography. Pan and zoom through stunning views of Weiss Lake and the surrounding community."
+>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Virtual Tour</h1>
+      <p class="page-intro">Experience The Bluffs in full 360°. Drag or swipe inside each viewer to pan around and explore the community from every angle.</p>
+    </div>
+  </section>
+
+  <section class="tours-section">
+    <div class="container">
+      {tours.map((tour, i) => (
+        <div class="tour-block">
+          <div class="tour-header">
+            <span class="tour-number">{String(i + 1).padStart(2, '0')}</span>
+            <h2 class="tour-label">{tour.label}</h2>
+          </div>
+          <p class="tour-desc">{tour.description}</p>
+          <div class="viewer-wrap">
+            <iframe
+              src={tour.url}
+              title={`360° virtual tour — ${tour.label}`}
+              frameborder="0"
+              allowfullscreen
+              allow="gyroscope; accelerometer; fullscreen"
+            ></iframe>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: var(--color-cream-dark);
+    border-bottom: 1px solid var(--color-olive-light);
+    padding: var(--space-16) 0 var(--space-12);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-4xl));
+    font-weight: 400;
+    color: var(--color-charcoal);
+    margin-bottom: var(--space-4);
+  }
+
+  .page-intro {
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: var(--color-charcoal-mid);
+    max-width: 640px;
+    margin: 0;
+  }
+
+  .tours-section {
+    padding: var(--space-16) 0 var(--space-20);
+  }
+
+  .tour-block {
+    margin-bottom: var(--space-20);
+  }
+
+  .tour-block:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .tour-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .tour-number {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-olive);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .tour-label {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--color-charcoal);
+    margin: 0;
+  }
+
+  .tour-desc {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-light);
+    margin: 0 0 var(--space-5);
+    line-height: 1.6;
+  }
+
+  .viewer-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-charcoal);
+  }
+
+  .viewer-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+  }
+
+  @media (max-width: 600px) {
+    .page-hero {
+      padding: var(--space-10) 0 var(--space-8);
+    }
+
+    .tour-block {
+      margin-bottom: var(--space-14);
+    }
+
+    /* 4:3 on mobile for better thumb experience */
+    .viewer-wrap {
+      padding-bottom: 75%;
+    }
+  }
+</style>

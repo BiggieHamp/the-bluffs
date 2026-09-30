@@ -3,7 +3,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 const aboutPaths = ['/our-vision', '/amenities', '/area-activities', '/nearby-towns', '/testimonials', '/our-building-team'];
 const isAbout = aboutPaths.some(p => pathname === p);
-const isGallery = pathname === '/gallery' || pathname.startsWith('/gallery/');
+const isGallery = pathname === '/gallery' || pathname.startsWith('/gallery/') || pathname === '/virtual-tour';
 
 function active(path: string) {
   return pathname === path ? 'active' : '';
@@ -68,6 +68,7 @@ function active(path: string) {
         <ul class="dropdown-menu" role="list">
           <li><a href="/gallery"          class:list={[active('/gallery')]}>Gallery</a></li>
           <li><a href="/gallery/lots-5-6" class:list={[active('/gallery/lots-5-6')]}>Lots 5 &amp; 6</a></li>
+          <li><a href="/virtual-tour"     class:list={[active('/virtual-tour')]}>Virtual Tour</a></li>
         </ul>
       </li>
 
