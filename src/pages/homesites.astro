@@ -1,6 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingTable from '../components/PricingTable.astro';
+import homesitesData from '../data/homesites.json';
+
+const phase1  = homesitesData.filter(l => l.phase === 1);
+const phase2  = homesitesData.filter(l => l.phase === 2);
+const phase2a = phase2.slice(0, 8);   // Lots 205–219
+const phase2b = phase2.slice(8);      // Lots 220–292
+const phase3  = homesitesData.filter(l => l.phase === 3);
+
+function fmtPrice(p: number) {
+  return p ? `$${Math.round(p / 1000)}k` : '—';
+}
 ---
 
 <BaseLayout
@@ -20,19 +31,158 @@ import PricingTable from '../components/PricingTable.astro';
     </div>
   </section>
 
-  <!-- PLAT MAP -->
+  <!-- PLAT MAP — interactive key overlay -->
   <section class="section-sm plat-section">
     <div class="container">
       <h2 class="section-heading">Property Map</h2>
+      <p class="plat-hint">Click a lot in the table to view details.</p>
+
       <div class="plat-wrap">
-        <img
-          src="/assets/images/pages/plat-map.jpg"
-          alt="Plat map of The Bluffs, showing Phase 1–3 lots on the Weiss Lake peninsula, Cedar Bluff, Cherokee County, Alabama"
-          width="830"
-          height="1170"
-          loading="lazy"
-          class="plat-img"
-        />
+        <!-- Map + overlay container -->
+        <div class="plat-map-container">
+          <img
+            src="/assets/images/pages/plat-map.jpg"
+            alt="Plat map of The Bluffs, showing Phase 1–3 lots on the Weiss Lake peninsula, Cedar Bluff, Cherokee County, Alabama"
+            width="830"
+            height="1170"
+            loading="lazy"
+            class="plat-img"
+            id="plat-img"
+          />
+
+          <!-- Interactive key — overlays the baked-in table in the image bottom-left -->
+          <div class="lot-key-overlay" id="lot-key-overlay" aria-label="Interactive lot key">
+            <p class="key-instruction">Click a lot to view details</p>
+            <div class="key-grid">
+
+              <!-- Phase 1 -->
+              <div class="key-phase-col">
+                <div class="key-col-header">Phase 1</div>
+                <table class="key-table">
+                  <thead><tr><th>Lot</th><th>Ac</th><th>Price</th></tr></thead>
+                  <tbody>
+                    {phase1.map(lot => (
+                      <tr
+                        class:list={['key-row', { 'key-row--available': lot.status === 'available' }]}
+                        data-lot-id={lot.id}
+                        role="button"
+                        tabindex={lot.status === 'available' ? '0' : undefined}
+                        aria-label={`View details for ${lot.lot}`}
+                      >
+                        <td>{lot.lot.replace('Lot ', '')}</td>
+                        <td>{lot.acres}</td>
+                        <td>{fmtPrice(lot.price)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Phase 2 first half -->
+              <div class="key-phase-col">
+                <div class="key-col-header">Phase 2</div>
+                <table class="key-table">
+                  <thead><tr><th>Lot</th><th>Ac</th><th>Price</th></tr></thead>
+                  <tbody>
+                    {phase2a.map(lot => (
+                      <tr
+                        class:list={['key-row', { 'key-row--available': lot.status === 'available' }]}
+                        data-lot-id={lot.id}
+                        role="button"
+                        tabindex={lot.status === 'available' ? '0' : undefined}
+                        aria-label={`View details for ${lot.lot}`}
+                      >
+                        <td>{lot.lot.replace('Lot ', '')}</td>
+                        <td>{lot.acres}</td>
+                        <td>{fmtPrice(lot.price)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Phase 2 continued -->
+              <div class="key-phase-col">
+                <div class="key-col-header">Phase 2 cont.</div>
+                <table class="key-table">
+                  <thead><tr><th>Lot</th><th>Ac</th><th>Price</th></tr></thead>
+                  <tbody>
+                    {phase2b.map(lot => (
+                      <tr
+                        class:list={['key-row', { 'key-row--available': lot.status === 'available' }]}
+                        data-lot-id={lot.id}
+                        role="button"
+                        tabindex={lot.status === 'available' ? '0' : undefined}
+                        aria-label={`View details for ${lot.lot}`}
+                      >
+                        <td>{lot.lot.replace('Lot ', '')}</td>
+                        <td>{lot.acres}</td>
+                        <td>{fmtPrice(lot.price)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Phase 3 -->
+              <div class="key-phase-col">
+                <div class="key-col-header">Phase 3</div>
+                <table class="key-table">
+                  <thead><tr><th>Lot</th><th>Ac</th><th>Price</th></tr></thead>
+                  <tbody>
+                    {phase3.map(lot => (
+                      <tr
+                        class:list={['key-row', { 'key-row--available': lot.status === 'available' }]}
+                        data-lot-id={lot.id}
+                        role="button"
+                        tabindex={lot.status === 'available' ? '0' : undefined}
+                        aria-label={`View details for ${lot.lot}`}
+                      >
+                        <td>{lot.lot.replace('Lot ', '')}</td>
+                        <td>{lot.acres}</td>
+                        <td>{fmtPrice(lot.price)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div><!-- /lot-key-overlay -->
+        </div><!-- /plat-map-container -->
+
+        <!-- Mobile-only interactive lot list (shown when overlay is hidden) -->
+        <div class="mobile-lot-list" id="mobile-lot-list" aria-label="Interactive lot list">
+          <p class="key-instruction">Tap a lot to view details</p>
+          {[
+            { label: 'Phase 1', lots: phase1 },
+            { label: 'Phase 2', lots: phase2 },
+            { label: 'Phase 3', lots: phase3 },
+          ].map(({ label, lots }) => (
+            <div class="mobile-phase-block">
+              <div class="mobile-phase-header">{label}</div>
+              <table class="mobile-key-table">
+                <thead><tr><th>Lot</th><th>Acres</th><th>Price</th></tr></thead>
+                <tbody>
+                  {lots.map(lot => (
+                    <tr
+                      class:list={['key-row', { 'key-row--available': lot.status === 'available' }]}
+                      data-lot-id={lot.id}
+                      role="button"
+                      tabindex={lot.status === 'available' ? '0' : undefined}
+                      aria-label={`View details for ${lot.lot}`}
+                    >
+                      <td>{lot.lot}</td>
+                      <td>{lot.acres} ac</td>
+                      <td>{fmtPrice(lot.price)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+
         <p class="plat-caption">
           The Bluffs — Overlooking Weiss Lake, Cedar Bluff, Cherokee County, Alabama.
         </p>
@@ -40,16 +190,45 @@ import PricingTable from '../components/PricingTable.astro';
     </div>
   </section>
 
+  <!-- LOT DETAIL PANEL -->
+  <aside class="lot-panel" id="lot-panel" aria-label="Lot details" aria-hidden="true">
+    <div class="lot-panel-head">
+      <div>
+        <p class="panel-phase" id="panel-phase"></p>
+        <h3 class="panel-title" id="panel-title"></h3>
+      </div>
+      <button class="panel-close" id="panel-close" aria-label="Close lot details">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="panel-photos" id="panel-photos"></div>
+    <div class="panel-stats">
+      <div class="panel-stat">
+        <span class="panel-stat-label">Acreage</span>
+        <span class="panel-stat-value" id="panel-acres"></span>
+      </div>
+      <div class="panel-stat">
+        <span class="panel-stat-label">List Price</span>
+        <span class="panel-stat-value" id="panel-price"></span>
+      </div>
+      <div class="panel-stat">
+        <span class="panel-stat-label">Status</span>
+        <span class="panel-stat-value" id="panel-status"></span>
+      </div>
+    </div>
+    <p class="panel-desc" id="panel-desc"></p>
+    <a href="/contact" class="btn btn-primary panel-cta" id="panel-cta">Contact Us About This Lot</a>
+  </aside>
+  <div class="lot-panel-backdrop" id="lot-panel-backdrop"></div>
+
   <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
 
   <!-- PRICING TABLE -->
   <section class="section-sm pricing-section">
     <div class="container">
       <h2 class="section-heading">Available Lots &amp; Pricing</h2>
-      <p class="pricing-intro">
-        To update lot status (available, sold, under contract) or pricing, edit
-        <code>src/data/homesites.json</code> — no other changes needed.
-      </p>
       <PricingTable />
     </div>
   </section>
@@ -93,40 +272,208 @@ import PricingTable from '../components/PricingTable.astro';
 </BaseLayout>
 
 <style>
+  /* ── Page header ── */
   .page-header {
     border-bottom: 1px solid var(--color-olive-light);
     padding-bottom: var(--space-10);
   }
-
-  .page-header h1 {
-    margin-bottom: var(--space-4);
-  }
-
+  .page-header h1 { margin-bottom: var(--space-4); }
   .page-intro {
     font-size: var(--text-md);
     color: var(--color-charcoal-mid);
     margin: 0;
   }
 
+  /* ── Section headings ── */
   .section-heading {
     font-size: var(--text-xl);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-3);
     color: var(--color-charcoal);
   }
+  .plat-hint {
+    font-size: var(--text-sm);
+    color: var(--color-olive);
+    margin-bottom: var(--space-5);
+  }
 
-  /* Plat map */
+  /* ── Plat wrap ── */
   .plat-wrap {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
   }
 
+  /* Container holds both the image and the absolutely positioned overlay */
+  .plat-map-container {
+    position: relative;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-olive-light);
+    overflow: hidden;
+    line-height: 0; /* removes gap below inline image */
+  }
+
   .plat-img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: var(--radius);
+  }
+
+  /* ── Interactive key overlay ── */
+  /* Covers the baked-in pricing table in the bottom-left of the image.
+     The image is 830×1170; the table area begins at ~59% from top and
+     spans ~46% of the width. Percentages scale with the rendered image. */
+  .lot-key-overlay {
+    position: absolute;
+    top: 58%;
+    left: 0;
+    bottom: 0;
+    width: 46.5%;
+    background: var(--color-cream);
+    border-top: 1px solid var(--color-olive-light);
+    border-right: 1px solid var(--color-olive-light);
+    padding: 4px 4px 4px 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .key-instruction {
+    font-size: 9px;
+    font-family: var(--font-body);
+    color: var(--color-olive);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 3px 1px;
+    line-height: 1.2;
+  }
+
+  /* Four-column grid: Phase 1 | Phase 2 | Phase 2 cont. | Phase 3 */
+  .key-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+  }
+
+  .key-phase-col {
+    min-width: 0;
+  }
+
+  .key-col-header {
+    font-size: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-white);
+    background: var(--color-charcoal);
+    padding: 2px 3px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .key-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+    font-family: var(--font-body);
+  }
+
+  .key-table th {
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--color-charcoal-light);
+    background: var(--color-cream-dark);
+    padding: 2px 2px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .key-table td {
+    padding: 1px 2px;
+    color: var(--color-charcoal);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 38px;
+  }
+
+  .key-row {
+    transition: background 100ms ease;
+  }
+
+  .key-row--available {
+    cursor: pointer;
+  }
+
+  .key-row--available:hover,
+  .key-row--available:focus-within {
+    background: var(--color-olive-light);
+    outline: none;
+  }
+
+  .key-row--available:focus {
+    outline: 2px solid var(--color-olive);
+    outline-offset: -1px;
+  }
+
+  /* ── Mobile lot list (shown below map on small screens) ── */
+  .mobile-lot-list {
+    display: none;
     border: 1px solid var(--color-olive-light);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    background: var(--color-cream-dark);
+  }
+
+  .mobile-lot-list .key-instruction {
+    font-size: var(--text-xs);
+    margin-bottom: var(--space-3);
+  }
+
+  .mobile-phase-block {
+    margin-bottom: var(--space-4);
+  }
+
+  .mobile-phase-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .mobile-phase-header {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-white);
+    background: var(--color-charcoal);
+    padding: var(--space-2) var(--space-3);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .mobile-key-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .mobile-key-table th {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-charcoal-light);
+    background: var(--color-cream);
+    padding: var(--space-2) var(--space-3);
+    text-align: left;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .mobile-key-table td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid rgba(140,137,100,0.1);
+    color: var(--color-charcoal);
   }
 
   .plat-caption {
@@ -136,51 +483,172 @@ import PricingTable from '../components/PricingTable.astro';
     margin: 0;
   }
 
-  /* Pricing section */
-  .pricing-intro {
-    font-size: var(--text-sm);
+  /* ── Lot detail panel ── */
+  .lot-panel {
+    position: fixed;
+    top: var(--nav-height);
+    right: 0;
+    bottom: 0;
+    width: 360px;
+    background: var(--color-cream);
+    border-left: 1px solid var(--color-olive-light);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.10);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 300ms ease;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lot-panel.open {
+    transform: translateX(0);
+  }
+
+  .lot-panel-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 28, 26, 0.35);
+    z-index: 199;
+  }
+
+  .lot-panel-backdrop.open {
+    display: block;
+  }
+
+  .lot-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--color-olive-light);
+    position: sticky;
+    top: 0;
+    background: var(--color-cream);
+    z-index: 1;
+  }
+
+  .panel-phase {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    margin-bottom: var(--space-1);
+  }
+
+  .panel-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--color-charcoal);
+  }
+
+  .panel-close {
+    background: none;
+    border: none;
+    cursor: pointer;
     color: var(--color-charcoal-light);
+    padding: var(--space-1);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: color var(--transition);
+  }
+  .panel-close:hover { color: var(--color-charcoal); }
+
+  .panel-photos {
+    width: 100%;
+    min-height: 180px;
+    background: var(--color-cream-dark);
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+  }
+
+  .panel-photos img {
+    flex: 1;
+    min-width: 0;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .panel-photo-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-charcoal-light);
+    font-size: var(--text-sm);
+    font-style: italic;
+  }
+
+  .panel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .panel-stat {
+    padding: var(--space-4) var(--space-5);
+    border-right: 1px solid var(--color-olive-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .panel-stat:last-child { border-right: none; }
+
+  .panel-stat-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-charcoal-light);
+  }
+
+  .panel-stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: var(--color-charcoal);
+  }
+
+  .panel-desc {
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-charcoal-mid);
+    line-height: 1.8;
+    border-bottom: 1px solid var(--color-olive-light);
+  }
+
+  .panel-cta {
+    margin: var(--space-6);
+    text-align: center;
+  }
+
+  /* ── Pricing section ── */
+  .pricing-section .section-heading {
     margin-bottom: var(--space-6);
   }
 
-  .pricing-intro code {
-    font-size: var(--text-xs);
-    background: var(--color-cream-dark);
-    padding: 2px 6px;
-    border-radius: 2px;
-    color: var(--color-charcoal-mid);
-  }
-
-  /* Agents */
+  /* ── Agents ── */
   .agents-block {
     display: flex;
     align-items: flex-start;
     gap: var(--space-16);
   }
 
-  .agents-text h2 {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-3);
-  }
-
+  .agents-text h2 { font-size: var(--text-xl); margin-bottom: var(--space-3); }
   .agents-firm {
     font-weight: 500;
     font-size: var(--text-md);
     color: var(--color-charcoal);
     margin-bottom: var(--space-1);
   }
+  .agents-text p { color: var(--color-charcoal-mid); font-size: var(--text-sm); margin: 0; }
 
-  .agents-text p {
-    color: var(--color-charcoal-mid);
-    font-size: var(--text-sm);
-    margin: 0;
-  }
-
-  .agents-list {
-    display: flex;
-    gap: var(--space-8);
-    flex-wrap: wrap;
-  }
+  .agents-list { display: flex; gap: var(--space-8); flex-wrap: wrap; }
 
   .agent-card {
     padding: var(--space-5) var(--space-6);
@@ -188,48 +656,100 @@ import PricingTable from '../components/PricingTable.astro';
     border-radius: var(--radius);
     background: var(--color-cream-dark);
   }
+  .agent-name { font-weight: 500; font-size: var(--text-sm); color: var(--color-charcoal); margin-bottom: var(--space-1); }
+  .agent-card a { font-size: var(--text-sm); color: var(--color-charcoal-mid); text-decoration: none; transition: color var(--transition); }
+  .agent-card a:hover { color: var(--color-olive); }
 
-  .agent-name {
-    font-weight: 500;
-    font-size: var(--text-sm);
-    color: var(--color-charcoal);
-    margin-bottom: var(--space-1);
-  }
-
-  .agent-card a {
-    font-size: var(--text-sm);
-    color: var(--color-charcoal-mid);
-    text-decoration: none;
-    transition: color var(--transition);
-  }
-
-  .agent-card a:hover {
-    color: var(--color-olive);
-  }
-
-  /* CTA band */
+  /* ── CTA band ── */
   .cta-band {
     background: var(--color-cream-dark);
     border-top: 1px solid var(--color-olive-light);
   }
+  .cta-band p { font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-6); }
+  .cta-buttons { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
 
-  .cta-band p {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-6);
-  }
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    /* Hide the image overlay; show the standalone mobile list instead */
+    .lot-key-overlay { display: none; }
+    .mobile-lot-list { display: block; }
 
-  .cta-buttons {
-    display: flex;
-    gap: var(--space-4);
-    justify-content: center;
-    flex-wrap: wrap;
+    .lot-panel {
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 75vh;
+      transform: translateY(100%);
+      border-left: none;
+      border-top: 1px solid var(--color-olive-light);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .lot-panel.open { transform: translateY(0); }
   }
 
   @media (max-width: 800px) {
-    .agents-block {
-      flex-direction: column;
-      gap: var(--space-8);
-    }
+    .agents-block { flex-direction: column; gap: var(--space-8); }
   }
 </style>
+
+<script define:vars={{ homesitesData }}>
+  const lots = {};
+  homesitesData.forEach(lot => { lots[lot.id] = lot; });
+
+  const panel    = document.getElementById('lot-panel');
+  const backdrop = document.getElementById('lot-panel-backdrop');
+  const closeBtn = document.getElementById('panel-close');
+
+  const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const statusLabel = { available: 'Available', sold: 'Sold', contract: 'Under Contract' };
+
+  function openPanel(lotId) {
+    const lot = lots[lotId];
+    if (!lot) return;
+
+    document.getElementById('panel-phase').textContent  = `Phase ${lot.phase}`;
+    document.getElementById('panel-title').textContent  = lot.lot;
+    document.getElementById('panel-acres').textContent  = `${lot.acres} ac`;
+    document.getElementById('panel-price').textContent  = lot.price ? fmt.format(lot.price) : 'Contact us';
+
+    const statusEl = document.getElementById('panel-status');
+    statusEl.textContent = statusLabel[lot.status] || lot.status;
+
+    const photosEl = document.getElementById('panel-photos');
+    const photos = lot.photos || [];
+    photosEl.innerHTML = photos.length
+      ? photos.map(src => `<img src="${src}" alt="${lot.lot}" loading="lazy" />`).join('')
+      : `<div class="panel-photo-placeholder">Photos coming soon</div>`;
+
+    const descEl = document.getElementById('panel-desc');
+    descEl.textContent = lot.description || '';
+    descEl.style.display = lot.description ? '' : 'none';
+
+    document.getElementById('panel-cta').href = `/contact?lot=${encodeURIComponent(lot.lot)}`;
+
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    backdrop.classList.add('open');
+    closeBtn.focus();
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    backdrop.classList.remove('open');
+  }
+
+  // Wire up all key rows (both overlay and mobile list)
+  document.querySelectorAll('.key-row--available').forEach(row => {
+    row.addEventListener('click', () => openPanel(row.dataset.lotId));
+    row.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPanel(row.dataset.lotId); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closePanel);
+  backdrop.addEventListener('click', closePanel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
