@@ -254,7 +254,7 @@
     { "file": "/assets/images/lots/lot-302/12.jpg", "view": null }
   ], "notes": "" },
 
-  { "id": "lot-312", "lot": "Lot 312", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "photos": [
+  { "id": "lot-312", "lot": "Lot 312", "phase": 3, "acres": 0.91, "price": 110000, "status": "sold", "photos": [
     { "file": "/assets/images/lots/lot-312/01.jpg", "view": null },
     { "file": "/assets/images/lots/lot-312/02.jpg", "view": null },
     { "file": "/assets/images/lots/lot-312/03.jpg", "view": null },
@@ -265,7 +265,7 @@
     { "file": "/assets/images/lots/lot-312/08.jpg", "view": null }
   ], "notes": "" },
 
-  { "id": "lot-313", "lot": "Lot 313", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "photos": [
+  { "id": "lot-313", "lot": "Lot 313", "phase": 3, "acres": 0.91, "price": 110000, "status": "sold", "photos": [
     { "file": "/assets/images/lots/lot-313/01.jpg", "view": null },
     { "file": "/assets/images/lots/lot-313/02.jpg", "view": null },
     { "file": "/assets/images/lots/lot-313/03.jpg", "view": null },

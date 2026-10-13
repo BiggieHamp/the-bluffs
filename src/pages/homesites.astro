@@ -22,6 +22,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
       <p class="page-intro">
         Homesites available across three phases, each with water views and access to
         the full community. Custom homes starting in the mid-$500s.
+        Browse the property map below - click any lot label in the key to view photos and details.
       </p>
     </div>
   </section>
@@ -57,7 +58,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase1.map((lot, i) => (
-                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id} data-status={lot.status}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
                           <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
@@ -74,7 +75,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase2a.map((lot, i) => (
-                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id} data-status={lot.status}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
                           <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
@@ -93,7 +94,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase2b.map((lot, i) => (
-                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id} data-status={lot.status}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
                           <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
@@ -110,7 +111,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase3.map((lot, i) => (
-                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id} data-status={lot.status}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
                           <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
@@ -187,6 +188,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
       <div>
         <p class="lot-panel-phase" id="panel-phase"></p>
         <h3 class="lot-panel-title" id="panel-title"></h3>
+        <span class="lot-sold-badge" id="panel-sold-badge" style="display:none">SOLD</span>
       </div>
       <button class="lot-panel-close" id="panel-close" aria-label="Close lot details">&#215;</button>
     </div>
@@ -364,6 +366,21 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
     opacity: 1;
   }
 
+  /* Sold lots */
+  .lot-row[data-status="sold"] td {
+    text-decoration: line-through;
+    color: #999 !important;
+  }
+
+  .lot-row[data-status="sold"]:hover td {
+    background: inherit !important;
+    color: #999 !important;
+  }
+
+  .lot-row[data-status="sold"] td:last-child::after {
+    display: none;
+  }
+
   /* Lot detail panel */
   .lot-panel-backdrop {
     display: none;
@@ -420,6 +437,18 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
     font-size: var(--text-2xl);
     color: var(--color-charcoal);
     margin: 0;
+  }
+
+  .lot-sold-badge {
+    display: inline-block;
+    margin-top: var(--space-2);
+    background: #b02020;
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 3px;
   }
 
   .lot-panel-close {
@@ -820,6 +849,13 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
 
     document.getElementById('panel-phase').textContent = `Phase ${lot.phase}`;
     document.getElementById('panel-title').textContent = lot.lot;
+
+    const soldBadge = document.getElementById('panel-sold-badge');
+    if (lot.status === 'sold') {
+      soldBadge.style.display = '';
+    } else {
+      soldBadge.style.display = 'none';
+    }
     document.getElementById('panel-cta').href = `/contact?lot=${encodeURIComponent(lot.lot)}`;
 
     const desc = document.getElementById('panel-desc');
