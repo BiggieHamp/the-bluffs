@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingTable from '../components/PricingTable.astro';
+import homesitesData from '../data/homesites.json';
+
+const phase1  = homesitesData.filter(l => l.phase === 1);
+const phase2  = homesitesData.filter(l => l.phase === 2);
+const phase2a = phase2.slice(0, 8);   // Lots 205–219
+const phase2b = phase2.slice(8);      // Lots 220–292
+const phase3  = homesitesData.filter(l => l.phase === 3);
 ---
 
 <BaseLayout
@@ -34,7 +41,92 @@ import PricingTable from '../components/PricingTable.astro';
             loading="lazy"
             class="plat-img"
           />
-          <div class="map-rect"></div>
+          <div class="map-rect">
+            <div class="key-inner">
+
+              <img src="/assets/images/logo.jpg" alt="The Bluffs" class="key-logo" />
+              <p class="key-note"><strong>Note:</strong> All Available Lots Listed Below (Shaded on Plat). All Others Sold. Price And Availability Subject To Change Without Prior Notice.</p>
+
+              <div class="key-tables">
+
+                <div class="key-col">
+                  <!-- Phase 1 -->
+                  <table class="key-tbl">
+                    <thead>
+                      <tr><th colspan="3" class="key-phase-hd">Phase 1</th></tr>
+                      <tr class="key-col-hds"><th>Lot#</th><th>Acreage</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                      {phase1.map((lot, i) => (
+                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                          <td>{lot.lot.replace('Lot ', '')}</td>
+                          <td>{lot.acres}</td>
+                          <td>${lot.price.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <!-- Phase 2 -->
+                  <table class="key-tbl">
+                    <thead>
+                      <tr><th colspan="3" class="key-phase-hd">Phase 2</th></tr>
+                      <tr class="key-col-hds"><th>Lot#</th><th>Acreage</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                      {phase2a.map((lot, i) => (
+                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                          <td>{lot.lot.replace('Lot ', '')}</td>
+                          <td>{lot.acres}</td>
+                          <td>${lot.price.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="key-col">
+                  <!-- Phase 2 Continued -->
+                  <table class="key-tbl">
+                    <thead>
+                      <tr><th colspan="3" class="key-phase-hd">Phase 2 - Continued</th></tr>
+                      <tr class="key-col-hds"><th>Lot#</th><th>Acreage</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                      {phase2b.map((lot, i) => (
+                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                          <td>{lot.lot.replace('Lot ', '')}</td>
+                          <td>{lot.acres}</td>
+                          <td>${lot.price.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <!-- Phase 3 -->
+                  <table class="key-tbl">
+                    <thead>
+                      <tr><th colspan="3" class="key-phase-hd">Phase 3</th></tr>
+                      <tr class="key-col-hds"><th>Lot#</th><th>Acreage</th><th>Price</th></tr>
+                    </thead>
+                    <tbody>
+                      {phase3.map((lot, i) => (
+                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                          <td>{lot.lot.replace('Lot ', '')}</td>
+                          <td>{lot.acres}</td>
+                          <td>${lot.price.toLocaleString()}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+              </div><!-- /key-tables -->
+
+              <p class="key-footer">* Acreage Approximate, Subject To Final Survey. &nbsp;&nbsp; Revised 10-2025</p>
+
+            </div><!-- /key-inner -->
+          </div>
         </div>
         <p class="plat-caption">
           The Bluffs — Overlooking Weiss Lake, Cedar Bluff, Cherokee County, Alabama.
@@ -143,8 +235,105 @@ import PricingTable from '../components/PricingTable.astro';
     top:    59.51%;
     left:   3.36%;
     width:  41.24%;
-    height: 38.17%;
-    background: var(--color-cream);
+    height: 40.49%;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  /* key-inner is the container query anchor so cqw = map-rect width */
+  .key-inner {
+    container-type: inline-size;
+    padding: 1.2cqw 1.5cqw 1cqw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6cqw;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .key-logo {
+    width: 48%;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .key-note {
+    font-size: 1.6cqw;
+    color: #1a1a1a !important;
+    text-align: center;
+    line-height: 1.3;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .key-note strong,
+  .key-note * {
+    color: #1a1a1a !important;
+  }
+
+  .key-tables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2cqw;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .key-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8cqw;
+  }
+
+  .key-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.8cqw;
+    line-height: 1.2;
+    border: 1px solid #aac0d0;
+  }
+
+  .key-phase-hd {
+    background: #c8dce8;
+    color: #1a1a1a;
+    font-size: 1.9cqw;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.5cqw 0.6cqw;
+    border-bottom: 1px solid #aac0d0;
+    line-height: 1.2;
+  }
+
+  .key-col-hds th {
+    background: #e4eef5;
+    color: #cc2200;
+    font-size: 1.7cqw;
+    font-weight: 700;
+    text-align: left;
+    padding: 0.3cqw 0.6cqw;
+    border-bottom: 1px solid #aac0d0;
+    line-height: 1.2;
+  }
+
+  .key-tbl tbody tr td {
+    padding: 0.25cqw 0.6cqw;
+    color: #1a1a1a;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  .row-white { background: #ffffff; }
+  .row-yellow { background: #fffff0; }
+
+  .key-footer {
+    font-size: 1.5cqw;
+    color: #444;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0;
+    margin-top: 0.5cqw;
   }
 
   .plat-caption {
