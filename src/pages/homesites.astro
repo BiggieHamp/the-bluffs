@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PricingTable from '../components/PricingTable.astro';
 import homesitesData from '../data/homesites.json';
 
 const phase1  = homesitesData.filter(l => l.phase === 1);
@@ -44,8 +43,8 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
           <div class="map-rect">
             <div class="key-inner">
 
-              <img src="/assets/images/logo.jpg" alt="The Bluffs" class="key-logo" />
-              <p class="key-note"><strong>Note:</strong> All Available Lots Listed Below (Shaded on Plat). All Others Sold. Price And Availability Subject To Change Without Prior Notice.</p>
+              <img src="/assets/images/logo-transparent.png" alt="The Bluffs" class="key-logo" />
+              <p class="key-note"><em>Note:</em> All Available Lots Listed Below (Shaded on Plat). All Others Sold. Price And Availability Subject To Change Without Prior Notice. <strong>Click Any Lot To View Photos &amp; Details.</strong></p>
 
               <div class="key-tables">
 
@@ -58,9 +57,9 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase1.map((lot, i) => (
-                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
-                          <td>{lot.acres}</td>
+                          <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
                         </tr>
                       ))}
@@ -75,9 +74,9 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase2a.map((lot, i) => (
-                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
-                          <td>{lot.acres}</td>
+                          <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
                         </tr>
                       ))}
@@ -94,9 +93,9 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase2b.map((lot, i) => (
-                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
-                          <td>{lot.acres}</td>
+                          <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
                         </tr>
                       ))}
@@ -111,9 +110,9 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
                     </thead>
                     <tbody>
                       {phase3.map((lot, i) => (
-                        <tr class={i % 2 === 0 ? 'row-white' : 'row-yellow'}>
+                        <tr class={`lot-row ${i % 2 === 0 ? 'row-white' : 'row-yellow'}`} data-lot-id={lot.id}>
                           <td>{lot.lot.replace('Lot ', '')}</td>
-                          <td>{lot.acres}</td>
+                          <td>{Number(lot.acres).toFixed(2)}</td>
                           <td>${lot.price.toLocaleString()}</td>
                         </tr>
                       ))}
@@ -132,20 +131,6 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
           The Bluffs — Overlooking Weiss Lake, Cedar Bluff, Cherokee County, Alabama.
         </p>
       </div>
-    </div>
-  </section>
-
-  <hr class="divider" style="max-width: var(--max-width); margin: 0 auto;" />
-
-  <!-- PRICING TABLE -->
-  <section class="section-sm pricing-section">
-    <div class="container">
-      <h2 class="section-heading">Available Lots &amp; Pricing</h2>
-      <p class="pricing-intro">
-        To update lot status (available, sold, under contract) or pricing, edit
-        <code>src/data/homesites.json</code> — no other changes needed.
-      </p>
-      <PricingTable />
     </div>
   </section>
 
@@ -180,10 +165,39 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
       <p>Ready to find your lot?</p>
       <div class="cta-buttons">
         <a href="/contact" class="btn btn-primary">Contact Us</a>
-        <a href="/gallery/lots-5-6" class="btn btn-outline">View Lots 5 &amp; 6 Photos</a>
       </div>
     </div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lot-lightbox" id="lot-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lot-lightbox-close" id="lightbox-close" aria-label="Close photo viewer">&#215;</button>
+    <div class="lot-lightbox-img-wrap">
+      <button class="lot-lightbox-nav prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <button class="lot-lightbox-nav next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+    </div>
+    <p class="lot-lightbox-label" id="lightbox-label"></p>
+    <p class="lot-lightbox-counter" id="lightbox-counter"></p>
+  </div>
+
+  <!-- LOT DETAIL PANEL -->
+  <aside class="lot-panel" id="lot-panel" aria-hidden="true" aria-label="Lot details">
+    <div class="lot-panel-header">
+      <div>
+        <p class="lot-panel-phase" id="panel-phase"></p>
+        <h3 class="lot-panel-title" id="panel-title"></h3>
+      </div>
+      <button class="lot-panel-close" id="panel-close" aria-label="Close lot details">&#215;</button>
+    </div>
+    <div class="lot-panel-body">
+      <div class="lot-panel-photos" id="panel-photos"></div>
+      <div class="lot-panel-stats" id="panel-stats"></div>
+      <p class="lot-panel-desc" id="panel-desc"></p>
+      <a class="lot-panel-cta" id="panel-cta" href="/contact">Contact Us About This Lot</a>
+    </div>
+  </aside>
+  <div class="lot-panel-backdrop" id="lot-panel-backdrop"></div>
 
 </BaseLayout>
 
@@ -235,7 +249,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
     top:    59.51%;
     left:   3.36%;
     width:  41.24%;
-    height: 40.49%;
+    height: 37.8%;
     background: #ffffff;
     overflow: hidden;
   }
@@ -243,17 +257,17 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
   /* key-inner is the container query anchor so cqw = map-rect width */
   .key-inner {
     container-type: inline-size;
-    padding: 1.5cqw 1.5cqw 1cqw;
+    padding: 0.8cqw 1.5cqw 0.8cqw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.2cqw;
+    gap: 0.6cqw;
     overflow: hidden;
     height: 100%;
   }
 
   .key-logo {
-    width: 62%;
+    width: 70%;
     height: auto;
     display: block;
     flex-shrink: 0;
@@ -272,6 +286,7 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
   .key-note * {
     color: #1a1a1a !important;
   }
+
 
   .key-tables {
     display: grid;
@@ -327,6 +342,314 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
   .row-white { background: #ffffff; }
   .row-yellow { background: #fffff0; }
 
+  .lot-row {
+    cursor: pointer;
+    transition: background 120ms, color 120ms;
+  }
+
+  .lot-row:hover td {
+    background: #d4e8f0 !important;
+    color: #1a3a4a;
+  }
+
+  .lot-row td:last-child::after {
+    content: ' ›';
+    opacity: 0.3;
+    transition: opacity 120ms;
+    font-weight: 700;
+    color: #2c7a9e;
+  }
+
+  .lot-row:hover td:last-child::after {
+    opacity: 1;
+  }
+
+  /* Lot detail panel */
+  .lot-panel-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 200;
+  }
+
+  .lot-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 92vw);
+    background: var(--color-cream);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.18);
+    z-index: 201;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+  }
+
+  .lot-panel[aria-hidden="false"] {
+    transform: translateX(0);
+  }
+
+  .lot-panel-backdrop.open {
+    display: block;
+  }
+
+  .lot-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-6) var(--space-6) var(--space-4);
+    border-bottom: 1px solid var(--color-olive-light);
+    gap: var(--space-4);
+    background: var(--color-cream-dark, #ECEAE0);
+  }
+
+  .lot-panel-phase {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-olive);
+    margin: 0 0 var(--space-1);
+  }
+
+  .lot-panel-title {
+    font-size: var(--text-2xl);
+    color: var(--color-charcoal);
+    margin: 0;
+  }
+
+  .lot-panel-close {
+    background: none;
+    border: 1px solid var(--color-olive-light);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-charcoal-mid);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .lot-panel-close:hover {
+    background: var(--color-olive-light);
+    color: var(--color-charcoal);
+  }
+
+  .lot-panel-body {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    flex: 1;
+  }
+
+  /* Photo gallery */
+  .lot-panel-photos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .lot-panel-photos:empty { display: none; }
+
+  :global(.photo-strip) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  :global(.photo-thumb) {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #e8e5d8;
+  }
+
+  :global(.photo-thumb img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 200ms;
+  }
+
+  :global(.photo-thumb:hover img) { transform: scale(1.04); }
+
+  :global(.photo-thumb-label) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 5px 5px;
+    line-height: 1;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  /* Lightbox */
+  .lot-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 300;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .lot-lightbox.open { display: flex; }
+
+  .lot-lightbox-img-wrap {
+    position: relative;
+    max-width: min(90vw, 900px);
+    max-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lot-lightbox-img-wrap img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .lot-lightbox-label {
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    text-align: center;
+    min-height: 1.2em;
+    width: min(90vw, 900px);
+  }
+
+  .lot-lightbox-counter {
+    color: rgba(255,255,255,0.5);
+    font-size: var(--text-xs);
+  }
+
+  .lot-lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms;
+    flex-shrink: 0;
+  }
+
+  .lot-lightbox-nav:hover { background: rgba(255,255,255,0.25); }
+  .lot-lightbox-nav.prev { left: -56px; }
+  .lot-lightbox-nav.next { right: -56px; }
+
+  .lot-lightbox-close {
+    position: fixed;
+    top: var(--space-5);
+    right: var(--space-5);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms;
+  }
+
+  .lot-lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+  .lot-panel-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  :global(.lot-panel-stat) {
+    background: #ffffff;
+    border: 1px solid var(--color-olive-light);
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    text-align: center;
+  }
+
+  :global(.lot-panel-stat-label) {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-charcoal-light);
+    margin: 0 0 var(--space-1);
+  }
+
+  :global(.lot-panel-stat-value) {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    margin: 0;
+  }
+
+  .lot-panel-desc {
+    font-size: var(--text-base);
+    color: var(--color-charcoal-mid);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .lot-panel-cta {
+    display: block;
+    text-align: center;
+    background: var(--color-olive);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius);
+    transition: background var(--transition);
+    margin-top: auto;
+  }
+
+  .lot-panel-cta:hover {
+    background: var(--color-olive-dark);
+  }
+
   .key-footer {
     font-size: 2.8cqw;
     color: #444;
@@ -343,20 +666,6 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
     margin: 0;
   }
 
-  /* Pricing section */
-  .pricing-intro {
-    font-size: var(--text-sm);
-    color: var(--color-charcoal-light);
-    margin-bottom: var(--space-6);
-  }
-
-  .pricing-intro code {
-    font-size: var(--text-xs);
-    background: var(--color-cream-dark);
-    padding: 2px 6px;
-    border-radius: 2px;
-    color: var(--color-charcoal-mid);
-  }
 
   /* Agents */
   .agents-block {
@@ -440,3 +749,127 @@ const phase3  = homesitesData.filter(l => l.phase === 3);
     }
   }
 </style>
+
+<script define:vars={{ homesitesData }}>
+  // ── Panel ──────────────────────────────────────────
+  const panel    = document.getElementById('lot-panel');
+  const backdrop = document.getElementById('lot-panel-backdrop');
+  const closeBtn = document.getElementById('panel-close');
+
+  // ── Lightbox ───────────────────────────────────────
+  const lightbox      = document.getElementById('lot-lightbox');
+  const lbImg         = document.getElementById('lightbox-img');
+  const lbLabel       = document.getElementById('lightbox-label');
+  const lbCounter     = document.getElementById('lightbox-counter');
+  const lbClose       = document.getElementById('lightbox-close');
+  const lbPrev        = document.getElementById('lightbox-prev');
+  const lbNext        = document.getElementById('lightbox-next');
+  let lbPhotos = [];
+  let lbIndex  = 0;
+
+  function lbShow(index) {
+    lbIndex = (index + lbPhotos.length) % lbPhotos.length;
+    const p = lbPhotos[lbIndex];
+    lbImg.src     = p.file;
+    lbImg.alt     = p.view || '';
+    lbLabel.textContent   = p.view ? `${p.view} View` : '';
+    lbCounter.textContent = `${lbIndex + 1} / ${lbPhotos.length}`;
+    lbPrev.style.display = lbPhotos.length > 1 ? '' : 'none';
+    lbNext.style.display = lbPhotos.length > 1 ? '' : 'none';
+  }
+
+  function openLightbox(photos, startIndex) {
+    lbPhotos = photos;
+    lbShow(startIndex);
+    lightbox.classList.add('open');
+    lbClose.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => lbShow(lbIndex - 1));
+  lbNext.addEventListener('click', () => lbShow(lbIndex + 1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  // ── Panel ──────────────────────────────────────────
+  function buildPhotoStrip(photos) {
+    const el = document.getElementById('panel-photos');
+    if (!photos || !photos.length) { el.innerHTML = ''; return; }
+
+    el.innerHTML = `<div class="photo-strip">${photos.map((p, i) => `
+      <div class="photo-thumb" data-index="${i}" tabindex="0" role="button" aria-label="${p.view ? p.view + ' view' : 'Lot photo ' + (i+1)}">
+        <img src="${p.file}" alt="${p.view ? p.view + ' view' : ''}" loading="lazy" />
+        ${p.view ? `<span class="photo-thumb-label">${p.view} View</span>` : ''}
+      </div>
+    `).join('')}</div>`;
+
+    el.querySelectorAll('.photo-thumb').forEach(thumb => {
+      const idx = parseInt(thumb.dataset.index);
+      const open = () => openLightbox(photos, idx);
+      thumb.addEventListener('click', open);
+      thumb.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
+  }
+
+  function openPanel(lotId) {
+    const lot = homesitesData.find(l => l.id === lotId);
+    if (!lot) return;
+
+    document.getElementById('panel-phase').textContent = `Phase ${lot.phase}`;
+    document.getElementById('panel-title').textContent = lot.lot;
+    document.getElementById('panel-cta').href = `/contact?lot=${encodeURIComponent(lot.lot)}`;
+
+    const desc = document.getElementById('panel-desc');
+    desc.textContent  = lot.description || '';
+    desc.style.display = lot.description ? 'block' : 'none';
+
+    document.getElementById('panel-stats').innerHTML = `
+      <div class="lot-panel-stat">
+        <p class="lot-panel-stat-label">Acreage</p>
+        <p class="lot-panel-stat-value">${Number(lot.acres).toFixed(2)}</p>
+      </div>
+      <div class="lot-panel-stat">
+        <p class="lot-panel-stat-label">Price</p>
+        <p class="lot-panel-stat-value">$${lot.price.toLocaleString()}</p>
+      </div>
+      <div class="lot-panel-stat">
+        <p class="lot-panel-stat-label">Status</p>
+        <p class="lot-panel-stat-value">${lot.status.charAt(0).toUpperCase() + lot.status.slice(1)}</p>
+      </div>
+    `;
+
+    buildPhotoStrip(lot.photos || []);
+
+    panel.setAttribute('aria-hidden', 'false');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closePanel() {
+    panel.setAttribute('aria-hidden', 'true');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.lot-row').forEach(row => {
+    row.addEventListener('click', () => openPanel(row.dataset.lotId));
+  });
+
+  closeBtn.addEventListener('click', closePanel);
+  backdrop.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (lightbox.classList.contains('open')) { closeLightbox(); return; }
+      closePanel();
+    }
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'ArrowLeft')  lbShow(lbIndex - 1);
+      if (e.key === 'ArrowRight') lbShow(lbIndex + 1);
+    }
+  });
+</script>

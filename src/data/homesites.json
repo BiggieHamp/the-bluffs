@@ -1,34 +1,279 @@
 [
-  { "id": "lot-5",   "lot": "Lot 5",   "phase": 1, "acres": 2.43, "price": 65000,  "status": "available", "description": "A spacious 2.43-acre homesite positioned along the southern ridge with sweeping Weiss Lake views. The gentle slope is well-suited for a walkout basement design, with mature hardwoods providing natural privacy on all sides.", "photos": ["/assets/images/lots-5-6/photo-01.jpg", "/assets/images/lots-5-6/photo-02.jpg", "/assets/images/lots-5-6/photo-03.jpg"], "notes": "" },
-  { "id": "lot-6",   "lot": "Lot 6",   "phase": 1, "acres": 2.91, "price": 75000,  "status": "available", "description": "Among the largest available Phase 1 lots at 2.91 acres. Open ridge terrain with expansive lake and mountain views from multiple orientations. Excellent elevation for panoramic sunset exposures.", "photos": ["/assets/images/lots-5-6/photo-04.jpg", "/assets/images/lots-5-6/photo-05.jpg", "/assets/images/lots-5-6/photo-06.jpg"], "notes": "" },
-  { "id": "lot-46",  "lot": "Lot 46",  "phase": 1, "acres": 0.91, "price": 45000,  "status": "available", "notes": "" },
-  { "id": "lot-52",  "lot": "Lot 52",  "phase": 1, "acres": 3.24, "price": 80000,  "status": "available", "notes": "" },
-  { "id": "lot-61",  "lot": "Lot 61",  "phase": 1, "acres": 2.15, "price": 55000,  "status": "available", "notes": "" },
-  { "id": "lot-62",  "lot": "Lot 62",  "phase": 1, "acres": 1.73, "price": 80000,  "status": "available", "notes": "" },
-  { "id": "lot-70",  "lot": "Lot 70",  "phase": 1, "acres": 2.69, "price": 30000,  "status": "available", "notes": "" },
+  { "id": "lot-5",   "lot": "Lot 5",   "phase": 1, "acres": 2.43, "price": 65000,  "status": "available", "description": "A spacious 2.43-acre homesite positioned along the southern ridge with sweeping Weiss Lake views. The gentle slope is well-suited for a walkout basement design, with mature hardwoods providing natural privacy on all sides.", "photos": [
+    { "file": "/assets/images/lots-5-6/photo-01.jpg", "view": null },
+    { "file": "/assets/images/lots-5-6/photo-02.jpg", "view": null },
+    { "file": "/assets/images/lots-5-6/photo-03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-5/00.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-5/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-5/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-5/03.jpg", "view": null }
+  ], "notes": "" },
 
-  { "id": "lot-205", "lot": "Lot 205", "phase": 2, "acres": 1.02, "price": 155000, "status": "available", "description": "A premier upper-phase homesite with morning sun exposure and treetop views toward the Little River Canyon corridor. Positioned along the community's highest road with easy access to Weiss Lake.", "photos": [], "notes": "" },
-  { "id": "lot-206", "lot": "Lot 206", "phase": 2, "acres": 1.92, "price": 140000, "status": "available", "notes": "" },
-  { "id": "lot-212", "lot": "Lot 212", "phase": 2, "acres": 1.99, "price": 90000,  "status": "available", "notes": "" },
-  { "id": "lot-213", "lot": "Lot 213", "phase": 2, "acres": 1.79, "price": 90000,  "status": "available", "notes": "" },
-  { "id": "lot-214", "lot": "Lot 214", "phase": 2, "acres": 1.63, "price": 100000, "status": "available", "notes": "" },
-  { "id": "lot-215", "lot": "Lot 215", "phase": 2, "acres": 0.92, "price": 90000,  "status": "available", "notes": "" },
-  { "id": "lot-218", "lot": "Lot 218", "phase": 2, "acres": 0.51, "price": 60000,  "status": "available", "notes": "" },
-  { "id": "lot-219", "lot": "Lot 219", "phase": 2, "acres": 1.00, "price": 50000,  "status": "available", "notes": "" },
-  { "id": "lot-220", "lot": "Lot 220", "phase": 2, "acres": 0.92, "price": 60000,  "status": "available", "notes": "" },
-  { "id": "lot-221", "lot": "Lot 221", "phase": 2, "acres": 1.02, "price": 50000,  "status": "available", "notes": "" },
-  { "id": "lot-222", "lot": "Lot 222", "phase": 2, "acres": 1.01, "price": 50000,  "status": "available", "notes": "" },
-  { "id": "lot-223", "lot": "Lot 223", "phase": 2, "acres": 0.96, "price": 50000,  "status": "available", "notes": "" },
-  { "id": "lot-224", "lot": "Lot 224", "phase": 2, "acres": 0.93, "price": 45000,  "status": "available", "notes": "" },
-  { "id": "lot-228", "lot": "Lot 228", "phase": 2, "acres": 1.64, "price": 35000,  "status": "available", "notes": "" },
-  { "id": "lot-229", "lot": "Lot 229", "phase": 2, "acres": 1.99, "price": 60000,  "status": "available", "notes": "" },
-  { "id": "lot-230", "lot": "Lot 230", "phase": 2, "acres": 1.32, "price": 60000,  "status": "available", "notes": "" },
-  { "id": "lot-231", "lot": "Lot 231", "phase": 2, "acres": 1.32, "price": 65000,  "status": "available", "notes": "" },
-  { "id": "lot-232", "lot": "Lot 232", "phase": 2, "acres": 1.24, "price": 70000,  "status": "available", "notes": "" },
-  { "id": "lot-292", "lot": "Lot 292", "phase": 2, "acres": 1.80, "price": 150000, "status": "available", "description": "A premium 1.80-acre homesite at one of the highest elevation points in the Phase 2 section. Exceptional 270° views spanning Weiss Lake and the surrounding Piedmont Mountains. Private cul-de-sac setting.", "photos": [], "notes": "" },
+  { "id": "lot-6",   "lot": "Lot 6",   "phase": 1, "acres": 2.91, "price": 75000,  "status": "available", "description": "Among the largest available Phase 1 lots at 2.91 acres. Open ridge terrain with expansive lake and mountain views from multiple orientations. Excellent elevation for panoramic sunset exposures.", "photos": [
+    { "file": "/assets/images/lots-5-6/photo-04.jpg", "view": null },
+    { "file": "/assets/images/lots-5-6/photo-05.jpg", "view": null },
+    { "file": "/assets/images/lots-5-6/photo-06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-6/06.jpg", "view": null }
+  ], "notes": "" },
 
-  { "id": "lot-301", "lot": "Lot 301", "phase": 3, "acres": 1.82, "price": 85000,  "status": "available", "description": "Phase 3 homesite with direct Weiss Lake view frontage. 1.82 acres with a relatively level building pad and quiet cul-de-sac positioning. One of the most accessible lots in the newest phase of the community.", "photos": [], "notes": "" },
-  { "id": "lot-302", "lot": "Lot 302", "phase": 3, "acres": 2.86, "price": 95000,  "status": "available", "notes": "" },
-  { "id": "lot-312", "lot": "Lot 312", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "notes": "" },
-  { "id": "lot-313", "lot": "Lot 313", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "notes": "" }
+  { "id": "lot-46",  "lot": "Lot 46",  "phase": 1, "acres": 0.91, "price": 45000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-46/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-46/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-46/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-46/04.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-52",  "lot": "Lot 52",  "phase": 1, "acres": 3.24, "price": 80000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-52/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-52/08.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-61",  "lot": "Lot 61",  "phase": 1, "acres": 2.15, "price": 55000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-61/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-61/07.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-62",  "lot": "Lot 62",  "phase": 1, "acres": 1.73, "price": 80000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-62/00.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-62/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-62/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-62/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-62/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-62/05.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-70",  "lot": "Lot 70",  "phase": 1, "acres": 2.69, "price": 30000,  "status": "available", "photos": [], "notes": "" },
+
+  { "id": "lot-205", "lot": "Lot 205", "phase": 2, "acres": 1.02, "price": 155000, "status": "available", "description": "A premier upper-phase homesite with morning sun exposure and treetop views toward the Little River Canyon corridor. Positioned along the community's highest road with easy access to Weiss Lake.", "photos": [
+    { "file": "/assets/images/lots/lot-205-206/01.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/03.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/06.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-205-206/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/09.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/10.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-205-206/11.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/12.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/13.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/14.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/15.jpg", "view": "Northeastern" }
+  ], "notes": "" },
+
+  { "id": "lot-206", "lot": "Lot 206", "phase": 2, "acres": 1.92, "price": 140000, "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-205-206/01.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/03.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/06.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-205-206/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/09.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/10.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-205-206/11.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/12.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/13.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-205-206/14.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-205-206/15.jpg", "view": "Northeastern" }
+  ], "notes": "" },
+
+  { "id": "lot-212", "lot": "Lot 212", "phase": 2, "acres": 1.99, "price": 90000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-212/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-212/02.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-212/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-212/04.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-212/05.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-212/06.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-213", "lot": "Lot 213", "phase": 2, "acres": 1.79, "price": 90000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-213/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-213/02.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-213/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-213/04.jpg", "view": "Northern" }
+  ], "notes": "" },
+
+  { "id": "lot-214", "lot": "Lot 214", "phase": 2, "acres": 1.63, "price": 100000, "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-214/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-214/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-214/03.jpg", "view": "Northern" }
+  ], "notes": "" },
+
+  { "id": "lot-215", "lot": "Lot 215", "phase": 2, "acres": 0.92, "price": 90000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-215/01.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-215/02.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-215/03.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-215/04.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-215/05.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-218", "lot": "Lot 218", "phase": 2, "acres": 0.51, "price": 60000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-218/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-218/02.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-218/03.jpg", "view": "Northwestern" },
+    { "file": "/assets/images/lots/lot-218/04.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-219", "lot": "Lot 219", "phase": 2, "acres": 1.00, "price": 50000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-219-220/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-219-220/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-219-220/03.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-219-220/04.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-219-220/05.jpg", "view": "Northwestern" },
+    { "file": "/assets/images/lots/lot-219-220/06.jpg", "view": "Northwestern" }
+  ], "notes": "" },
+
+  { "id": "lot-220", "lot": "Lot 220", "phase": 2, "acres": 0.92, "price": 60000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-219-220/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-219-220/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-219-220/03.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-219-220/04.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-219-220/05.jpg", "view": "Northwestern" },
+    { "file": "/assets/images/lots/lot-219-220/06.jpg", "view": "Northwestern" }
+  ], "notes": "" },
+
+  { "id": "lot-221", "lot": "Lot 221", "phase": 2, "acres": 1.02, "price": 50000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-221/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-221/02.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-221/03.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-221/04.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-221/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-221/06.jpg", "view": "Eastern" }
+  ], "notes": "" },
+
+  { "id": "lot-222", "lot": "Lot 222", "phase": 2, "acres": 1.01, "price": 50000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-222/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-222/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-222/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-222/04.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-222/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-222/06.jpg", "view": "Southeastern" },
+    { "file": "/assets/images/lots/lot-222/07.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-223", "lot": "Lot 223", "phase": 2, "acres": 0.96, "price": 50000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-223/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-223/02.jpg", "view": "Southern" },
+    { "file": "/assets/images/lots/lot-223/03.jpg", "view": "Southwestern" },
+    { "file": "/assets/images/lots/lot-223/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-223/05.jpg", "view": "Eastern" },
+    { "file": "/assets/images/lots/lot-223/06.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-224", "lot": "Lot 224", "phase": 2, "acres": 0.93, "price": 45000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-224/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-224/09.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-228", "lot": "Lot 228", "phase": 2, "acres": 1.64, "price": 35000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-228/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-228/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-228/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-228/04.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-229", "lot": "Lot 229", "phase": 2, "acres": 1.99, "price": 60000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-229/00.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-229/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-229/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-229/02-1.png", "view": null },
+    { "file": "/assets/images/lots/lot-229/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-229/05.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-230", "lot": "Lot 230", "phase": 2, "acres": 1.32, "price": 60000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-230/00.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-230/00-1.png", "view": null },
+    { "file": "/assets/images/lots/lot-230/01.png", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-231", "lot": "Lot 231", "phase": 2, "acres": 1.32, "price": 65000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-231/00.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-231/00-1.png", "view": null },
+    { "file": "/assets/images/lots/lot-231/02.png", "view": null },
+    { "file": "/assets/images/lots/lot-231/04.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-232", "lot": "Lot 232", "phase": 2, "acres": 1.24, "price": 70000,  "status": "available", "photos": [], "notes": "" },
+
+  { "id": "lot-292", "lot": "Lot 292", "phase": 2, "acres": 1.80, "price": 150000, "status": "available", "description": "A premium 1.80-acre homesite at one of the highest elevation points in the Phase 2 section. Exceptional 270° views spanning Weiss Lake and the surrounding Piedmont Mountains. Private cul-de-sac setting.", "photos": [
+    { "file": "/assets/images/lots/lot-292/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-292/02.jpg", "view": "Northwestern" },
+    { "file": "/assets/images/lots/lot-292/03.jpg", "view": "Northern" },
+    { "file": "/assets/images/lots/lot-292/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-292/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-292/06.jpg", "view": "Northwestern" },
+    { "file": "/assets/images/lots/lot-292/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-292/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-292/09.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-301", "lot": "Lot 301", "phase": 3, "acres": 1.82, "price": 85000,  "status": "available", "description": "Phase 3 homesite with direct Weiss Lake view frontage. 1.82 acres with a relatively level building pad and quiet cul-de-sac positioning. One of the most accessible lots in the newest phase of the community.", "photos": [
+    { "file": "/assets/images/lots/lot-301/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-301/02.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-302", "lot": "Lot 302", "phase": 3, "acres": 2.86, "price": 95000,  "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-302/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/09.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/10.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/11.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-302/12.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-312", "lot": "Lot 312", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-312/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-312/08.jpg", "view": null }
+  ], "notes": "" },
+
+  { "id": "lot-313", "lot": "Lot 313", "phase": 3, "acres": 0.91, "price": 110000, "status": "available", "photos": [
+    { "file": "/assets/images/lots/lot-313/01.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/02.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/03.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/04.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/05.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/06.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/07.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/08.jpg", "view": null },
+    { "file": "/assets/images/lots/lot-313/09.jpg", "view": null }
+  ], "notes": "" }
 ]
